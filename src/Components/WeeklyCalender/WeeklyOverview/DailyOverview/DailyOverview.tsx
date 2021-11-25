@@ -11,18 +11,20 @@ interface props {
 
 const DailyOverview: React.FC<props> = ({ day, date, tasks }) => {
     return (
-        <div>
-            <div>
-                <h1>{day}</h1>
-                <h2>{getDayFromUTC(date)}</h2>
+        <div className="daily-overview-container">
+            <div className="daily-day-date-container">
+                <h1 className="daily-day">{day}</h1>
+                <h2 className="daily-date">{getDayFromUTC(date)}</h2>
                 {/* if date = todays date - show "today" */}
             </div>
-            <div>
+            <div className="daily-task-container">
                 {tasks.map((task) => {
                     return (
-                        <div key={task.id}>
-                            <h3>{task.name}</h3>
-                            <p>{task.description}</p>
+                        <div className="daily-task" key={task.id}>
+                            <h3 className="daily-task-title">{task.name}</h3>
+                            <p className="daily-task-description">
+                                {task.description}
+                            </p>
                         </div>
                     );
                 })}
