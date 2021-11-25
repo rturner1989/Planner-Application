@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { days } from "../../Library/Enums";
 import DailyDetail from "./DailyDetail/DailyDetail";
 import WeeklyOverview from "./WeeklyOverview/WeeklyOverview";
-import { days } from "../../Library/Enums";
 
 // Calender Container
 

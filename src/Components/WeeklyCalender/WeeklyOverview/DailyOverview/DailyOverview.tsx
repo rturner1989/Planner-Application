@@ -4,14 +4,12 @@ import { task } from "../../../../Library/Interfaces";
 import { getDayFromUTC } from "../../../../Library/Helpers";
 
 interface props {
-    day: days;
+    day?: days;
     date: number;
     tasks: task[];
 }
 
 const DailyOverview: React.FC<props> = ({ day, date, tasks }) => {
-    console.log(tasks);
-
     return (
         <div>
             <div>
@@ -19,7 +17,16 @@ const DailyOverview: React.FC<props> = ({ day, date, tasks }) => {
                 <h2>{getDayFromUTC(date)}</h2>
                 {/* if date = todays date - show "today" */}
             </div>
-            {/* <div>{tasks}</div> */}
+            <div>
+                {tasks.map((task) => {
+                    return (
+                        <div key={task.id}>
+                            <h3>{task.name}</h3>
+                            <p>{task.description}</p>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };

@@ -1,145 +1,123 @@
 import React, { useState } from "react";
 import { data } from "../../../data";
 import { days } from "../../../Library/Enums";
+import {
+    isDateSame,
+    getStartWeekDate,
+    addDaysToDate,
+    subtractDaysFromDate,
+} from "../../../Library/DateTime";
+import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
 
 interface props {
     setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
 }
+interface week {
+    monday: day;
+    tuesday: day;
+    wednesday: day;
+    thursday: day;
+    friday: day;
+    saturday: day;
+    sunday: day;
+}
+interface day {
+    date: number;
+    tasks: task[];
+}
 
 const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
-    const getStartWeekDate = (): number => {
-        const today = new Date().getDate();
-        const day = new Date().getDay();
-        const difference = day - (day === 0 ? -6 : 1);
-        return new Date().setDate(today - difference);
+    const getWeek = (startDate: number): week => {
+        const tues = addDaysToDate(startDate, 1);
+        const wed = addDaysToDate(startDate, 2);
+        const thurs = addDaysToDate(startDate, 3);
+        const fri = addDaysToDate(startDate, 4);
+        const sat = addDaysToDate(startDate, 5);
+        const sun = addDaysToDate(startDate, 6);
+        return {
+            monday: { date: startDate, tasks: filterByDate(data, startDate) },
+            tuesday: { date: tues, tasks: filterByDate(data, tues) },
+            wednesday: { date: wed, tasks: filterByDate(data, wed) },
+            thursday: { date: thurs, tasks: filterByDate(data, thurs) },
+            friday: { date: fri, tasks: filterByDate(data, fri) },
+            saturday: { date: sat, tasks: filterByDate(data, sat) },
+            sunday: { date: sun, tasks: filterByDate(data, sun) },
+        };
     };
+
+    const filterByDate = (tasks: task[], date: number): task[] => {
+        return tasks.filter((item) => {
+            if (isDateSame(item.endDate, date)) return item;
+        });
+    };
+
+    // STATES
 
     const [startOfCurrentWeek, setStartOfCurrentWeek] = useState<number>(() =>
         getStartWeekDate()
     );
-    const [selectedMonday, setSelectedMonday] = useState<number>(() =>
-        getStartWeekDate()
+    const [selectedWeek, setSelectedWeek] = useState<week>(() =>
+        getWeek(getStartWeekDate())
     );
 
-    const addDaysToDate = (utc: number, numberOfDays: number) => {
-        const start = new Date(utc).getDate();
-        return new Date().setDate(start + numberOfDays);
-    };
-
-    const subtractDaysFromDate = (utc: number, numberOfDays: number) => {
-        const start = new Date(utc).getDate();
-        return new Date().setDate(start - numberOfDays);
-    };
+    // ACTIONS (FUNCTIONS)
 
     const previousWeek = () => {
         const startMonday = new Date(startOfCurrentWeek).getDate();
-        const currentMonday = new Date(selectedMonday).getDate();
+        const currentMonday = new Date(selectedWeek.monday.date).getDate();
         if (currentMonday < startMonday) return;
-        const newWeek = subtractDaysFromDate(selectedMonday, 7);
-        setSelectedMonday(newWeek);
+        const newMonday = subtractDaysFromDate(selectedWeek.monday.date, 7);
+        setSelectedWeek(getWeek(newMonday));
     };
 
     const nextWeek = () => {
         const startMonday = new Date(startOfCurrentWeek).getDate();
-        const currentMonday = new Date(selectedMonday).getDate();
+        const currentMonday = new Date(selectedWeek.monday.date).getDate();
         if (currentMonday > startMonday) return;
-        const newWeek = addDaysToDate(selectedMonday, 7);
-        setSelectedMonday(newWeek);
+        const newMonday = addDaysToDate(selectedWeek.monday.date, 7);
+        setSelectedWeek(getWeek(newMonday));
     };
 
     return (
         <div className="weekly-overview-container">
             <button onClick={previousWeek}>prev</button>
             <button onClick={nextWeek}>next</button>
+            <button>Add</button>
             <DailyOverview
                 day={days.MONDAY}
-                date={selectedMonday}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(selectedMonday);
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.monday.date}
+                tasks={selectedWeek.monday.tasks}
             />
             <DailyOverview
                 day={days.TUESDAY}
-                date={addDaysToDate(selectedMonday, 1)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 1)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.tuesday.date}
+                tasks={selectedWeek.tuesday.tasks}
             />
             <DailyOverview
                 day={days.WEDNESDAY}
-                date={addDaysToDate(selectedMonday, 2)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 2)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.wednesday.date}
+                tasks={selectedWeek.wednesday.tasks}
             />
             <DailyOverview
                 day={days.THURSDAY}
-                date={addDaysToDate(selectedMonday, 3)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 3)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.thursday.date}
+                tasks={selectedWeek.thursday.tasks}
             />
             <DailyOverview
                 day={days.FRIDAY}
-                date={addDaysToDate(selectedMonday, 4)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 4)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.friday.date}
+                tasks={selectedWeek.friday.tasks}
             />
             <DailyOverview
                 day={days.SATURDAY}
-                date={addDaysToDate(selectedMonday, 5)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 5)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.saturday.date}
+                tasks={selectedWeek.saturday.tasks}
             />
             <DailyOverview
                 day={days.SUNDAY}
-                date={addDaysToDate(selectedMonday, 6)}
-                tasks={data.filter((item) => {
-                    const date = new Date(item.endDate);
-                    const todaysDate = new Date(
-                        addDaysToDate(selectedMonday, 6)
-                    );
-                    if (date.getFullYear() !== todaysDate.getFullYear()) return;
-                    if (date.getMonth() !== todaysDate.getMonth()) return;
-                    if (date.getDay() === todaysDate.getDay()) return item;
-                })}
+                date={selectedWeek.sunday.date}
+                tasks={selectedWeek.sunday.tasks}
             />
         </div>
     );
