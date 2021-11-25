@@ -2,6 +2,7 @@ import React from "react";
 import { days } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { getDayFromUTC } from "../../../../Library/Helpers";
+import { isDateSame } from "../../../../Library/DateTime";
 
 interface props {
     day?: days;
@@ -9,12 +10,15 @@ interface props {
     tasks: task[];
 }
 
+const todaysDate = new Date().getTime();
+
 const DailyOverview: React.FC<props> = ({ day, date, tasks }) => {
     return (
         <div className="daily-overview-container">
             <div className="daily-day-date-container">
                 <h1 className="daily-day">{day}</h1>
                 <h2 className="daily-date">{getDayFromUTC(date)}</h2>
+                {isDateSame(date, todaysDate) && <h3>today</h3>}
                 {/* if date = todays date - show "today" */}
             </div>
             <div className="daily-task-container">
