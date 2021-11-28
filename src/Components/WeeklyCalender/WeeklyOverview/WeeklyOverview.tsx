@@ -85,36 +85,43 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
             <button onClick={nextWeek}>next</button>
             <button>Add</button>
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.MONDAY}
                 date={selectedWeek.monday.date}
                 tasks={selectedWeek.monday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.TUESDAY}
                 date={selectedWeek.tuesday.date}
                 tasks={selectedWeek.tuesday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.WEDNESDAY}
                 date={selectedWeek.wednesday.date}
                 tasks={selectedWeek.wednesday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.THURSDAY}
                 date={selectedWeek.thursday.date}
                 tasks={selectedWeek.thursday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.FRIDAY}
                 date={selectedWeek.friday.date}
                 tasks={selectedWeek.friday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.SATURDAY}
                 date={selectedWeek.saturday.date}
                 tasks={selectedWeek.saturday.tasks}
             />
             <DailyOverview
+                handleClick={setSelectedDay}
                 day={days.SUNDAY}
                 date={selectedWeek.sunday.date}
                 tasks={selectedWeek.sunday.tasks}
