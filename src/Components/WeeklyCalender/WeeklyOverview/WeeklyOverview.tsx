@@ -11,6 +11,7 @@ import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
 import ModalContainer from "../../ModalContainer/ModalContainer";
 import TaskEditor from "../../TaskEditor/TaskEditor";
+import { useCalenderContext } from "../../Context/CalenderContext";
 
 interface props {
     setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
@@ -30,6 +31,8 @@ interface day {
 }
 
 const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
+    // const { setTaskFormData } = useCalenderContext();
+
     const getWeek = (startDate: number): week => {
         const tues = addDaysToDate(startDate, 1);
         const wed = addDaysToDate(startDate, 2);
@@ -83,6 +86,10 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
         setSelectedWeek(getWeek(newMonday));
     };
 
+    const addTask = (task: task) => {
+        console.log(task);
+    };
+
     return (
         <div className="weekly-overview-container">
             <button onClick={previousWeek}>prev</button>
@@ -132,7 +139,7 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
             />
             {isModalVisible && (
                 <ModalContainer handleClose={() => setIsModalVisible(false)}>
-                    <TaskEditor />
+                    <TaskEditor formData={undefined} handleSubmit={addTask} />
                 </ModalContainer>
             )}
         </div>

@@ -1,56 +1,85 @@
-import React from "react";
-import { useCalenderContext } from "../Context/CalenderContext";
+import React, { useState } from "react";
+import { task } from "../../Library/Interfaces";
 
-const TaskEditor = () => {
-    const { taskFormData, setTaskFormData } = useCalenderContext();
+interface props {
+    formData: task | undefined;
+    handleSubmit: (newTask: task) => void;
+}
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (typeof e.currentTarget.value !== "string") return;
-        setTaskFormData({
-            ...taskFormData,
-            title: e.currentTarget.value,
-            [e.target.name]: e.currentTarget.value,
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(taskFormData);
-    };
+const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
+    // States
+    const [taskInput, setTaskInput] = useState(
+        formData
+            ? formData
+            : (): task => {
+                  return {
+                      id: 0,
+                      name: "",
+                      description: "",
+                      endDate: new Date().getTime(),
+                      startTime: 0,
+                      endTime: 0,
+                  };
+              }
+    );
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <div>
                 <label htmlFor="">
                     Title:
-                    <input type="text" name="title" onChange={handleChange} />
+                    <input
+                        value={taskInput.name}
+                        type="text"
+                        name="title"
+                        placeholder="title"
+                        onChange={(e) =>
+                            setTaskInput({ ...taskInput, name: e.target.value })
+                        }
+                    />
                 </label>
                 <label htmlFor="">
                     Description:
-                    <input
-                        type="textarea"
+                    <textarea
+                        value={taskInput.description}
                         name="description"
-                        onChange={handleChange}
+                        placeholder="description"
+                        onChange={(e) =>
+                            setTaskInput({
+                                ...taskInput,
+                                description: e.target.value,
+                            })
+                        }
                     />
                 </label>
             </div>
             <div>
                 <label htmlFor="">
                     Date:
-                    <input type="date" name="endDate" onChange={handleChange} />
-                </label>
-                <label htmlFor="">
-                    Start Time:
                     <input
-                        type="time"
-                        name="startTime"
-                        onChange={handleChange}
+                        value={`${new Date(
+                            taskInput.endDate
+                        ).getFullYear()}-${new Date(
+                            taskInput.endDate
+                        ).getMonth()}-${new Date(taskInput.endDate).getDate()}`}
+                        type="date"
+                        name="endDate"
+                        onChange={(e) => {
+                            setTaskInput({
+                                ...taskInput,
+                                endDate: new Date(e.target.value).getTime(),
+                            });
+                        }}
                     />
+                </label>
+                {/* <label htmlFor="">
+                    Start Time:
+                    <input type="time" name="startTime" />
                 </label>
                 <label htmlFor="">
                     End Time:
-                    <input type="time" name="endTime" onChange={handleChange} />
-                </label>
+                    <input type="time" name="endTime" />
+                </label> */}
             </div>
             {/* <div>
                 <p>Repeat:</p>
@@ -93,7 +122,9 @@ const TaskEditor = () => {
                     </select>
                 </label>
             </div> */}
-            <button type="submit">Save</button>
+            <button type="submit" onClick={() => handleSubmit(taskInput)}>
+                Save
+            </button>
         </form>
     );
 };
