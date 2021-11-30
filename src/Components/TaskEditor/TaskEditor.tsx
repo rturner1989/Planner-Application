@@ -17,8 +17,8 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                       name: "",
                       description: "",
                       endDate: new Date().getTime(),
-                      startTime: 0,
-                      endTime: 0,
+                      startTime: "12:00",
+                      endTime: "12:00",
                   };
               }
     );
@@ -34,7 +34,10 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         name="title"
                         placeholder="title"
                         onChange={(e) =>
-                            setTaskInput({ ...taskInput, name: e.target.value })
+                            setTaskInput({
+                                ...taskInput,
+                                name: e.target.value,
+                            })
                         }
                     />
                 </label>
@@ -57,11 +60,9 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                 <label htmlFor="">
                     Date:
                     <input
-                        value={`${new Date(
-                            taskInput.endDate
-                        ).getFullYear()}-${new Date(
-                            taskInput.endDate
-                        ).getMonth()}-${new Date(taskInput.endDate).getDate()}`}
+                        value={new Date(taskInput.endDate)
+                            .toISOString()
+                            .substr(0, 10)}
                         type="date"
                         name="endDate"
                         onChange={(e) => {
@@ -72,14 +73,34 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         }}
                     />
                 </label>
-                {/* <label htmlFor="">
+                <label htmlFor="">
                     Start Time:
-                    <input type="time" name="startTime" />
+                    <input
+                        value={taskInput.startTime}
+                        type="time"
+                        name="startTime"
+                        onChange={(e) => {
+                            setTaskInput({
+                                ...taskInput,
+                                startTime: e.target.value,
+                            });
+                        }}
+                    />
                 </label>
                 <label htmlFor="">
                     End Time:
-                    <input type="time" name="endTime" />
-                </label> */}
+                    <input
+                        value={taskInput.endTime}
+                        type="time"
+                        name="endTime"
+                        onChange={(e) => {
+                            setTaskInput({
+                                ...taskInput,
+                                endTime: e.target.value,
+                            });
+                        }}
+                    />
+                </label>
             </div>
             {/* <div>
                 <p>Repeat:</p>
@@ -122,7 +143,23 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     </select>
                 </label>
             </div> */}
-            <button type="submit" onClick={() => handleSubmit(taskInput)}>
+            <button
+                type="submit"
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(taskInput);
+                    setTaskInput((): task => {
+                        return {
+                            id: 0,
+                            name: "",
+                            description: "",
+                            endDate: new Date().getTime(),
+                            startTime: "",
+                            endTime: "",
+                        };
+                    });
+                }}
+            >
                 Save
             </button>
         </form>

@@ -65,7 +65,6 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
     const [selectedWeek, setSelectedWeek] = useState<week>(() =>
         getWeek(getStartWeekDate())
     );
-
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // ACTIONS (FUNCTIONS)
@@ -95,6 +94,11 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
             <button onClick={previousWeek}>prev</button>
             <button onClick={nextWeek}>next</button>
             <button onClick={() => setIsModalVisible(true)}>Add</button>
+            {isModalVisible && (
+                <ModalContainer handleClose={() => setIsModalVisible(false)}>
+                    <TaskEditor formData={undefined} handleSubmit={addTask} />
+                </ModalContainer>
+            )}
             <DailyOverview
                 handleClick={setSelectedDay}
                 day={days.MONDAY}
@@ -137,11 +141,6 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
                 date={selectedWeek.sunday.date}
                 tasks={selectedWeek.sunday.tasks}
             />
-            {isModalVisible && (
-                <ModalContainer handleClose={() => setIsModalVisible(false)}>
-                    <TaskEditor formData={undefined} handleSubmit={addTask} />
-                </ModalContainer>
-            )}
         </div>
     );
 };
