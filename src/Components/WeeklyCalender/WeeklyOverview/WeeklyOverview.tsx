@@ -11,10 +11,11 @@ import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
 import ModalContainer from "../../ModalContainer/ModalContainer";
 import TaskEditor from "../../TaskEditor/TaskEditor";
-import { useCalenderContext } from "../../Context/CalenderContext";
 
 interface props {
     setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
+    taskFormData: task[] | undefined;
+    setTaskFormData: React.Dispatch<React.SetStateAction<task[] | undefined>>;
 }
 interface week {
     monday: day;
@@ -30,9 +31,11 @@ interface day {
     tasks: task[];
 }
 
-const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
-    // const { setTaskFormData } = useCalenderContext();
-
+const WeeklyOverview: React.FC<props> = ({
+    setSelectedDay,
+    taskFormData,
+    setTaskFormData,
+}) => {
     const getWeek = (startDate: number): week => {
         const tues = addDaysToDate(startDate, 1);
         const wed = addDaysToDate(startDate, 2);
@@ -69,20 +72,28 @@ const WeeklyOverview: React.FC<props> = ({ setSelectedDay }) => {
 
     // ACTIONS (FUNCTIONS)
 
+    // const previousWeek = () => {
+    //     const startMonday = new Date(startOfCurrentWeek).getDate();
+    //     const currentMonday = new Date(selectedWeek.monday.date).getDate();
+    //     if (currentMonday < startMonday) return;
+    //     const newMonday = subtractDaysFromDate(selectedWeek.monday.date, 7);
+    //     setSelectedWeek(getWeek(newMonday));
+    // };
+
+    // const nextWeek = () => {
+    //     const startMonday = new Date(startOfCurrentWeek).getDate();
+    //     const currentMonday = new Date(selectedWeek.monday.date).getDate();
+    //     if (currentMonday > startMonday) return;
+    //     const newMonday = addDaysToDate(selectedWeek.monday.date, 7);
+    //     setSelectedWeek(getWeek(newMonday));
+    // };
+
     const previousWeek = () => {
-        const startMonday = new Date(startOfCurrentWeek).getDate();
-        const currentMonday = new Date(selectedWeek.monday.date).getDate();
-        if (currentMonday < startMonday) return;
-        const newMonday = subtractDaysFromDate(selectedWeek.monday.date, 7);
-        setSelectedWeek(getWeek(newMonday));
+        console.log("previous");
     };
 
     const nextWeek = () => {
-        const startMonday = new Date(startOfCurrentWeek).getDate();
-        const currentMonday = new Date(selectedWeek.monday.date).getDate();
-        if (currentMonday > startMonday) return;
-        const newMonday = addDaysToDate(selectedWeek.monday.date, 7);
-        setSelectedWeek(getWeek(newMonday));
+        console.log("next");
     };
 
     const addTask = (task: task) => {
