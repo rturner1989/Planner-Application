@@ -7,7 +7,7 @@ import { isDateSame } from "../../../../Library/DateTime";
 interface props {
     handleClick: React.Dispatch<React.SetStateAction<days | undefined>>;
     day?: days;
-    date: number;
+    date: string;
     tasks: task[];
 }
 
@@ -21,8 +21,8 @@ const DailyOverview: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         >
             <div className="daily-day-date-container">
                 <h1 className="daily-day">{day}</h1>
-                <h2 className="daily-date">{getDayFromUTC(date)}</h2>
-                {isDateSame(date, todaysDate) && <h3>today</h3>}
+                <h2 className="daily-date">{date}</h2>
+                {/* {isDateSame(date, todaysDate) && <h3>today</h3>} */}
             </div>
             <div className="daily-task-container">
                 {tasks.map((task) => {

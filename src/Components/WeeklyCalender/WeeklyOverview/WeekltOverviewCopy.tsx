@@ -7,7 +7,6 @@ import {
     addDaysToDate,
     subtractDaysFromDate,
     getStartWeekDateString,
-    getDayOfCurrentWeek,
 } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
@@ -29,7 +28,7 @@ interface week {
     sunday: day;
 }
 interface day {
-    date: string;
+    date: number;
     tasks: task[];
 }
 
@@ -38,41 +37,57 @@ const WeeklyOverview: React.FC<props> = ({
     taskFormData,
     setTaskFormData,
 }) => {
-    const getWeek = (): week => {
-        const mon = getDayOfCurrentWeek(1);
-        const tues = getDayOfCurrentWeek(2);
-        const wed = getDayOfCurrentWeek(3);
-        const thurs = getDayOfCurrentWeek(4);
-        const fri = getDayOfCurrentWeek(5);
-        const sat = getDayOfCurrentWeek(6);
-        const sun = getDayOfCurrentWeek(7);
+    const getWeek = (startDate: number): week => {
+        const tues = addDaysToDate(startDate, 1);
+        const wed = addDaysToDate(startDate, 2);
+        const thurs = addDaysToDate(startDate, 3);
+        const fri = addDaysToDate(startDate, 4);
+        const sat = addDaysToDate(startDate, 5);
+        const sun = addDaysToDate(startDate, 6);
         return {
-            monday: { date: mon, tasks: [] },
-            tuesday: { date: tues, tasks: [] },
-            wednesday: { date: wed, tasks: [] },
-            thursday: { date: thurs, tasks: [] },
-            friday: { date: fri, tasks: [] },
-            saturday: { date: sat, tasks: [] },
-            sunday: { date: sun, tasks: [] },
+            monday: { date: startDate, tasks: filterByDate(data, startDate) },
+            tuesday: { date: tues, tasks: filterByDate(data, tues) },
+            wednesday: { date: wed, tasks: filterByDate(data, wed) },
+            thursday: { date: thurs, tasks: filterByDate(data, thurs) },
+            friday: { date: fri, tasks: filterByDate(data, fri) },
+            saturday: { date: sat, tasks: filterByDate(data, sat) },
+            sunday: { date: sun, tasks: filterByDate(data, sun) },
         };
+    };
+
+    const filterByDate = (tasks: task[], date: number): task[] => {
+        return tasks.filter((item) => {
+            if (isDateSame(item.endDate, date)) return item;
+        });
     };
 
     // STATES
 
-    const [startOfCurrentWeekString, setStartOfCurrentWeekString] =
-        useState<string>(() => getStartWeekDateString());
+    const [startOfCurrentWeek, setStartOfCurrentWeek] = useState<number>(() =>
+        getStartWeekDate()
+    );
 
-    const [selectedWeek, setSelectedWeek] = useState<week>(() => getWeek());
+    const [selectedWeek, setSelectedWeek] = useState<week>(() =>
+        getWeek(getStartWeekDate())
+    );
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // ACTIONS (FUNCTIONS)
 
     const previousWeek = () => {
-        console.log("previous");
+        const startMonday = new Date(startOfCurrentWeek).getDate();
+        const currentMonday = new Date(selectedWeek.monday.date).getDate();
+        if (currentMonday < startMonday) return;
+        const newMonday = subtractDaysFromDate(selectedWeek.monday.date, 7);
+        setSelectedWeek(getWeek(newMonday));
     };
 
     const nextWeek = () => {
-        console.log("next");
+        const startMonday = new Date(startOfCurrentWeek).getDate();
+        const currentMonday = new Date(selectedWeek.monday.date).getDate();
+        if (currentMonday > startMonday) return;
+        const newMonday = addDaysToDate(selectedWeek.monday.date, 7);
+        setSelectedWeek(getWeek(newMonday));
     };
 
     const addTask = (task: task) => {
@@ -89,7 +104,7 @@ const WeeklyOverview: React.FC<props> = ({
                     <TaskEditor formData={undefined} handleSubmit={addTask} />
                 </ModalContainer>
             )}
-            <DailyOverview
+            {/* <DailyOverview
                 handleClick={setSelectedDay}
                 day={days.MONDAY}
                 date={selectedWeek.monday.date}
@@ -130,7 +145,7 @@ const WeeklyOverview: React.FC<props> = ({
                 day={days.SUNDAY}
                 date={selectedWeek.sunday.date}
                 tasks={selectedWeek.sunday.tasks}
-            />
+            /> */}
         </div>
     );
 };

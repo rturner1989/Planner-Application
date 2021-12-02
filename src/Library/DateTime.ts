@@ -27,3 +27,25 @@ export const subtractDaysFromDate = (utc: number, numberOfDays: number) => {
     const start = new Date(utc).getDate();
     return new Date().setDate(start - numberOfDays);
 };
+
+export const getStartWeekDateString = (): string => {
+    // get current date
+    const currentDate = new Date();
+    // get start of current week (monday)
+    const firstday = new Date(
+        currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1)
+    ).toUTCString();
+    console.log(firstday);
+    return firstday;
+};
+
+export const getDayOfCurrentWeek = (numberOfDays: number) => {
+    const currentDate = new Date();
+    const dayOfWeek = new Date(
+        currentDate.setDate(
+            currentDate.getDate() - currentDate.getDay() + numberOfDays
+        )
+    ).toUTCString();
+    console.log(dayOfWeek);
+    return dayOfWeek;
+};
