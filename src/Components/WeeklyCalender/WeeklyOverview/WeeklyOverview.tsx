@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { data } from "../../../data";
 import { days } from "../../../Library/Enums";
 import { getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
@@ -8,8 +7,8 @@ import ModalContainer from "../../ModalContainer/ModalContainer";
 import TaskEditor from "../../TaskEditor/TaskEditor";
 
 interface props {
-    taskFormData: task[] | undefined;
-    setTaskFormData: React.Dispatch<React.SetStateAction<task[] | undefined>>;
+    taskFormData: task[];
+    setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
     setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
 }
 interface week {
@@ -73,8 +72,7 @@ const WeeklyOverview: React.FC<props> = ({
         }
     };
     const addTask = (task: task) => {
-        console.log(task);
-        setTaskFormData([task]);
+        setTaskFormData([...taskFormData, task]);
     };
 
     return (

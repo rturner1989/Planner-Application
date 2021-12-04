@@ -33,12 +33,13 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         type="text"
                         name="title"
                         placeholder="title"
-                        onChange={(e) =>
+                        required
+                        onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
                                 name: e.target.value,
-                            })
-                        }
+                            });
+                        }}
                     />
                 </label>
                 <label htmlFor="">
@@ -47,6 +48,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         value={taskInput.description}
                         name="description"
                         placeholder="description"
+                        required
                         onChange={(e) =>
                             setTaskInput({
                                 ...taskInput,
@@ -65,6 +67,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                             .substr(0, 10)}
                         type="date"
                         name="endDate"
+                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -79,6 +82,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         value={taskInput.startTime}
                         type="time"
                         name="startTime"
+                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -93,6 +97,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         value={taskInput.endTime}
                         type="time"
                         name="endTime"
+                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -154,8 +159,8 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                             name: "",
                             description: "",
                             endDate: new Date().toUTCString(),
-                            startTime: "",
-                            endTime: "",
+                            startTime: "12:00",
+                            endTime: "12:00",
                         };
                     });
                 }}

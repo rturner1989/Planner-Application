@@ -8,7 +8,7 @@ import WeeklyOverview from "./WeeklyOverview/WeeklyOverview";
 
 const WeeklyCalender = () => {
     const [selectedDay, setSelectedDay] = useState<days>();
-    const [taskFormData, setTaskFormData] = useState<task[]>();
+    const [taskFormData, setTaskFormData] = useState<task[]>([]);
 
     return (
         <div id="weekly-calender-container">
