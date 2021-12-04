@@ -8,6 +8,9 @@ import {
     subtractDaysFromDate,
     getStartWeekDateString,
     getDayOfCurrentWeek,
+    getDayOfNextWeek,
+    getDayOfPreviousWeek,
+    getDayOfNextWeekTest,
 } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
@@ -38,7 +41,7 @@ const WeeklyOverview: React.FC<props> = ({
     taskFormData,
     setTaskFormData,
 }) => {
-    const getWeek = (): week => {
+    const getCurrentWeek = (): week => {
         const mon = getDayOfCurrentWeek(1);
         const tues = getDayOfCurrentWeek(2);
         const wed = getDayOfCurrentWeek(3);
@@ -56,23 +59,64 @@ const WeeklyOverview: React.FC<props> = ({
             sunday: { date: sun, tasks: [] },
         };
     };
+    const getNextWeek = (): week => {
+        const mon = getDayOfNextWeek(0);
+        const tues = getDayOfNextWeek(1);
+        const wed = getDayOfNextWeek(2);
+        const thurs = getDayOfNextWeek(3);
+        const fri = getDayOfNextWeek(4);
+        const sat = getDayOfNextWeek(5);
+        const sun = getDayOfNextWeek(6);
+        return {
+            monday: { date: mon, tasks: [] },
+            tuesday: { date: tues, tasks: [] },
+            wednesday: { date: wed, tasks: [] },
+            thursday: { date: thurs, tasks: [] },
+            friday: { date: fri, tasks: [] },
+            saturday: { date: sat, tasks: [] },
+            sunday: { date: sun, tasks: [] },
+        };
+    };
+    const getPreviousWeek = (): week => {
+        const mon = getDayOfPreviousWeek(0);
+        const tues = getDayOfPreviousWeek(1);
+        const wed = getDayOfPreviousWeek(2);
+        const thurs = getDayOfPreviousWeek(3);
+        const fri = getDayOfPreviousWeek(4);
+        const sat = getDayOfPreviousWeek(5);
+        const sun = getDayOfPreviousWeek(6);
+        return {
+            monday: { date: mon, tasks: [] },
+            tuesday: { date: tues, tasks: [] },
+            wednesday: { date: wed, tasks: [] },
+            thursday: { date: thurs, tasks: [] },
+            friday: { date: fri, tasks: [] },
+            saturday: { date: sat, tasks: [] },
+            sunday: { date: sun, tasks: [] },
+        };
+    };
 
     // STATES
 
     const [startOfCurrentWeekString, setStartOfCurrentWeekString] =
         useState<string>(() => getStartWeekDateString());
 
-    const [selectedWeek, setSelectedWeek] = useState<week>(() => getWeek());
+    const [selectedWeek, setSelectedWeek] = useState<week>(() =>
+        getCurrentWeek()
+    );
+
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     // ACTIONS (FUNCTIONS)
 
     const previousWeek = () => {
         console.log("previous");
+        setSelectedWeek(getPreviousWeek());
     };
 
     const nextWeek = () => {
         console.log("next");
+        setSelectedWeek(getNextWeek());
     };
 
     const addTask = (task: task) => {
