@@ -49,39 +49,3 @@ export const getDayOfCurrentWeek = (numberOfDays: number) => {
     console.log(dayOfWeek);
     return dayOfWeek;
 };
-
-export const getDayOfNextWeek = (numberOfDays: number) => {
-    const currentDate = new Date();
-    const firstDay = new Date(
-        currentDate.setDate(
-            currentDate.getDate() - currentDate.getDay() + 8 + numberOfDays
-        )
-    ).toUTCString();
-    console.log(firstDay);
-    return firstDay;
-};
-
-export const getDayOfNextWeekTest = (
-    passedDate: string,
-    numberOfDays: number
-) => {
-    const currentDate = new Date(passedDate);
-    const firstDay = new Date(
-        currentDate.setDate(
-            currentDate.getDate() - currentDate.getDay() + numberOfDays
-        )
-    ).toUTCString();
-    console.log(firstDay);
-    return firstDay;
-};
-
-export const getDayOfPreviousWeek = (numberOfDays: number) => {
-    const currentDate = new Date();
-    const firstDay = new Date(
-        currentDate.setDate(
-            currentDate.getDate() - currentDate.getDay() - 6 + numberOfDays
-        )
-    ).toUTCString();
-    console.log(firstDay);
-    return firstDay;
-};
