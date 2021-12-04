@@ -1,23 +1,16 @@
 import React, { useState } from "react";
 import { data } from "../../../data";
 import { days } from "../../../Library/Enums";
-import {
-    isDateSame,
-    getStartWeekDate,
-    addDaysToDate,
-    subtractDaysFromDate,
-    getStartWeekDateString,
-    getDayOfCurrentWeek,
-} from "../../../Library/DateTime";
+import { isDateSame, getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import DailyOverview from "./DailyOverview/DailyOverview";
 import ModalContainer from "../../ModalContainer/ModalContainer";
 import TaskEditor from "../../TaskEditor/TaskEditor";
 
 interface props {
-    setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
     taskFormData: task[] | undefined;
     setTaskFormData: React.Dispatch<React.SetStateAction<task[] | undefined>>;
+    setSelectedDay: React.Dispatch<React.SetStateAction<days | undefined>>;
 }
 interface week {
     day: string;
@@ -30,10 +23,9 @@ const WeeklyOverview: React.FC<props> = ({
     taskFormData,
     setTaskFormData,
 }) => {
+    // States
     const [isModalVisible, setIsModalVisible] = useState(false);
-
     const [count, setCount] = useState(1);
-
     const [arrOfWeeks, setArrOfWeeks] = useState([
         // previous week
         [
@@ -76,10 +68,9 @@ const WeeklyOverview: React.FC<props> = ({
     };
 
     const nextWeek = () => {
-        if (count <= 2) {
+        if (count < arrOfWeeks.length - 1) {
             setCount(count + 1);
         }
-        if (count > 2) return;
     };
 
     const addTask = (task: task) => {
@@ -103,7 +94,7 @@ const WeeklyOverview: React.FC<props> = ({
                         handleClick={setSelectedDay}
                         day={week.day}
                         date={week.date}
-                        tasks={[]}
+                        tasks={week.tasks}
                     />
                 );
             })}

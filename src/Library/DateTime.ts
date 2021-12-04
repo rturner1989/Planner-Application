@@ -11,23 +11,6 @@ export const isDateSame = (
     return true;
 };
 
-export const getStartWeekDate = (): number => {
-    const today = new Date().getDate();
-    const day = new Date().getDay();
-    const difference = day - (day === 0 ? -6 : 1);
-    return new Date().setDate(today - difference);
-};
-
-export const addDaysToDate = (utc: number, numberOfDays: number) => {
-    const start = new Date(utc).getDate();
-    return new Date().setDate(start + numberOfDays);
-};
-
-export const subtractDaysFromDate = (utc: number, numberOfDays: number) => {
-    const start = new Date(utc).getDate();
-    return new Date().setDate(start - numberOfDays);
-};
-
 export const getStartWeekDateString = (): string => {
     // get current date
     const currentDate = new Date();
@@ -35,7 +18,6 @@ export const getStartWeekDateString = (): string => {
     const firstday = new Date(
         currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1)
     ).toUTCString();
-    console.log(firstday);
     return firstday;
 };
 
@@ -46,6 +28,5 @@ export const getDayOfCurrentWeek = (numberOfDays: number) => {
             currentDate.getDate() - currentDate.getDay() + numberOfDays
         )
     ).toUTCString();
-    console.log(dayOfWeek);
     return dayOfWeek;
 };
