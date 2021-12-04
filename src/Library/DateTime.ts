@@ -1,7 +1,7 @@
 // all functions to support time and dates
 export const isDateSame = (
-    firstNumber: number,
-    secondNumber: number
+    firstNumber: string,
+    secondNumber: string
 ): boolean => {
     const dateOne = new Date(firstNumber);
     const dateTwo = new Date(secondNumber);
@@ -10,7 +10,6 @@ export const isDateSame = (
     if (dateOne.getDate() !== dateTwo.getDate()) return false;
     return true;
 };
-
 export const getStartWeekDateString = (): string => {
     // get current date
     const currentDate = new Date();
@@ -20,7 +19,6 @@ export const getStartWeekDateString = (): string => {
     ).toUTCString();
     return firstday;
 };
-
 export const getDayOfCurrentWeek = (numberOfDays: number) => {
     const currentDate = new Date();
     const dayOfWeek = new Date(

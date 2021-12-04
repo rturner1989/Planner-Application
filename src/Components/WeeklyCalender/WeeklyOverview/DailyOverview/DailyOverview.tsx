@@ -1,17 +1,16 @@
 import React from "react";
 import { days } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
-import { getDayFromUTC } from "../../../../Library/Helpers";
 import { isDateSame } from "../../../../Library/DateTime";
 
 interface props {
     handleClick: React.Dispatch<React.SetStateAction<days | undefined>>;
-    day?: days;
+    day: days;
     date: string;
     tasks: task[];
 }
 
-const todaysDate = new Date().getTime();
+const todaysDate = new Date().toUTCString();
 
 const DailyOverview: React.FC<props> = ({ handleClick, day, date, tasks }) => {
     return (
@@ -22,7 +21,7 @@ const DailyOverview: React.FC<props> = ({ handleClick, day, date, tasks }) => {
             <div className="daily-day-date-container">
                 <h1 className="daily-day">{day}</h1>
                 <h2 className="daily-date">{date}</h2>
-                {/* {isDateSame(date, todaysDate) && <h3>today</h3>} */}
+                {isDateSame(date, todaysDate) && <h3>today</h3>}
             </div>
             <div className="daily-task-container">
                 {tasks.map((task) => {

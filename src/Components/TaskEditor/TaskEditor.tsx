@@ -16,7 +16,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                       id: 0,
                       name: "",
                       description: "",
-                      endDate: new Date().getTime(),
+                      endDate: new Date().toUTCString(),
                       startTime: "12:00",
                       endTime: "12:00",
                   };
@@ -68,7 +68,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
-                                endDate: new Date(e.target.value).getTime(),
+                                endDate: new Date(e.target.value).toUTCString(),
                             });
                         }}
                     />
@@ -153,7 +153,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                             id: 0,
                             name: "",
                             description: "",
-                            endDate: new Date().getTime(),
+                            endDate: new Date().toUTCString(),
                             startTime: "",
                             endTime: "",
                         };

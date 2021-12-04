@@ -13,7 +13,7 @@ export interface task {
     id: number;
     name: string;
     description: string;
-    endDate: number;
+    endDate: string;
     startTime?: string;
     endTime?: string;
     // repeat?: repeat;
