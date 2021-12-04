@@ -24,12 +24,12 @@ interface props {
 }
 interface week {
     monday: day;
-    tuesday: day;
-    wednesday: day;
-    thursday: day;
-    friday: day;
-    saturday: day;
-    sunday: day;
+    tuesday?: day;
+    wednesday?: day;
+    thursday?: day;
+    friday?: day;
+    saturday?: day;
+    sunday?: day;
 }
 interface day {
     date: string;
@@ -43,56 +43,56 @@ const WeeklyOverview: React.FC<props> = ({
 }) => {
     const getCurrentWeek = (): week => {
         const mon = getDayOfCurrentWeek(1);
-        const tues = getDayOfCurrentWeek(2);
-        const wed = getDayOfCurrentWeek(3);
-        const thurs = getDayOfCurrentWeek(4);
-        const fri = getDayOfCurrentWeek(5);
-        const sat = getDayOfCurrentWeek(6);
-        const sun = getDayOfCurrentWeek(7);
+        // const tues = getDayOfCurrentWeek(2);
+        // const wed = getDayOfCurrentWeek(3);
+        // const thurs = getDayOfCurrentWeek(4);
+        // const fri = getDayOfCurrentWeek(5);
+        // const sat = getDayOfCurrentWeek(6);
+        // const sun = getDayOfCurrentWeek(7);
         return {
             monday: { date: mon, tasks: [] },
-            tuesday: { date: tues, tasks: [] },
-            wednesday: { date: wed, tasks: [] },
-            thursday: { date: thurs, tasks: [] },
-            friday: { date: fri, tasks: [] },
-            saturday: { date: sat, tasks: [] },
-            sunday: { date: sun, tasks: [] },
+            // tuesday: { date: tues, tasks: [] },
+            // wednesday: { date: wed, tasks: [] },
+            // thursday: { date: thurs, tasks: [] },
+            // friday: { date: fri, tasks: [] },
+            // saturday: { date: sat, tasks: [] },
+            // sunday: { date: sun, tasks: [] },
         };
     };
     const getNextWeek = (): week => {
         const mon = getDayOfNextWeek(0);
-        const tues = getDayOfNextWeek(1);
-        const wed = getDayOfNextWeek(2);
-        const thurs = getDayOfNextWeek(3);
-        const fri = getDayOfNextWeek(4);
-        const sat = getDayOfNextWeek(5);
-        const sun = getDayOfNextWeek(6);
+        // const tues = getDayOfNextWeek(1);
+        // const wed = getDayOfNextWeek(2);
+        // const thurs = getDayOfNextWeek(3);
+        // const fri = getDayOfNextWeek(4);
+        // const sat = getDayOfNextWeek(5);
+        // const sun = getDayOfNextWeek(6);
         return {
             monday: { date: mon, tasks: [] },
-            tuesday: { date: tues, tasks: [] },
-            wednesday: { date: wed, tasks: [] },
-            thursday: { date: thurs, tasks: [] },
-            friday: { date: fri, tasks: [] },
-            saturday: { date: sat, tasks: [] },
-            sunday: { date: sun, tasks: [] },
+            // tuesday: { date: tues, tasks: [] },
+            // wednesday: { date: wed, tasks: [] },
+            // thursday: { date: thurs, tasks: [] },
+            // friday: { date: fri, tasks: [] },
+            // saturday: { date: sat, tasks: [] },
+            // sunday: { date: sun, tasks: [] },
         };
     };
     const getPreviousWeek = (): week => {
         const mon = getDayOfPreviousWeek(0);
-        const tues = getDayOfPreviousWeek(1);
-        const wed = getDayOfPreviousWeek(2);
-        const thurs = getDayOfPreviousWeek(3);
-        const fri = getDayOfPreviousWeek(4);
-        const sat = getDayOfPreviousWeek(5);
-        const sun = getDayOfPreviousWeek(6);
+        // const tues = getDayOfPreviousWeek(1);
+        // const wed = getDayOfPreviousWeek(2);
+        // const thurs = getDayOfPreviousWeek(3);
+        // const fri = getDayOfPreviousWeek(4);
+        // const sat = getDayOfPreviousWeek(5);
+        // const sun = getDayOfPreviousWeek(6);
         return {
             monday: { date: mon, tasks: [] },
-            tuesday: { date: tues, tasks: [] },
-            wednesday: { date: wed, tasks: [] },
-            thursday: { date: thurs, tasks: [] },
-            friday: { date: fri, tasks: [] },
-            saturday: { date: sat, tasks: [] },
-            sunday: { date: sun, tasks: [] },
+            // tuesday: { date: tues, tasks: [] },
+            // wednesday: { date: wed, tasks: [] },
+            // thursday: { date: thurs, tasks: [] },
+            // friday: { date: fri, tasks: [] },
+            // saturday: { date: sat, tasks: [] },
+            // sunday: { date: sun, tasks: [] },
         };
     };
 
@@ -111,12 +111,12 @@ const WeeklyOverview: React.FC<props> = ({
 
     const previousWeek = () => {
         console.log("previous");
-        setSelectedWeek(getPreviousWeek());
+        // setSelectedWeek(getPreviousWeek());
     };
 
     const nextWeek = () => {
         console.log("next");
-        setSelectedWeek(getNextWeek());
+        // setSelectedWeek(getNextWeek());
     };
 
     const addTask = (task: task) => {
@@ -139,7 +139,7 @@ const WeeklyOverview: React.FC<props> = ({
                 date={selectedWeek.monday.date}
                 tasks={selectedWeek.monday.tasks}
             />
-            <DailyOverview
+            {/* <DailyOverview
                 handleClick={setSelectedDay}
                 day={days.TUESDAY}
                 date={selectedWeek.tuesday.date}
@@ -174,7 +174,7 @@ const WeeklyOverview: React.FC<props> = ({
                 day={days.SUNDAY}
                 date={selectedWeek.sunday.date}
                 tasks={selectedWeek.sunday.tasks}
-            />
+            /> */}
         </div>
     );
 };
