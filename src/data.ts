@@ -5,7 +5,7 @@ export const data: task[] = [
         id: 101,
         name: "Design Dicussion",
         description: "discuss design options",
-        endDate: new Date("11/22/2021").toUTCString(),
+        endDate: new Date("12/07/2021").toUTCString(),
         // repeat: {
         //     mon: true,
         //     tues: true,
@@ -21,7 +21,7 @@ export const data: task[] = [
         id: 102,
         name: "Grooming First Sketches",
         description: "groom",
-        endDate: new Date("11/23/2021").toUTCString(),
+        endDate: new Date("12/08/2021").toUTCString(),
         // repeat: {
         //     mon: true,
         //     tues: false,
@@ -37,7 +37,7 @@ export const data: task[] = [
         id: 103,
         name: "Development Planning",
         description: "discuss planning options",
-        endDate: new Date("11/24/2021").toUTCString(),
+        endDate: new Date("12/09/2021").toUTCString(),
         // repeat: {
         //     mon: false,
         //     tues: true,
@@ -53,7 +53,7 @@ export const data: task[] = [
         id: 104,
         name: "Food shopping",
         description: "go shopping for food",
-        endDate: new Date("11/25/2021").toUTCString(),
+        endDate: new Date("12/10/2021").toUTCString(),
         // repeat: {
         //     mon: true,
         //     tues: false,
@@ -69,7 +69,7 @@ export const data: task[] = [
         id: 105,
         name: "doctors appointment",
         description: "visit doctors about that thing",
-        endDate: new Date("11/26/2021").toUTCString(),
+        endDate: new Date("12/11/2021").toUTCString(),
         // repeat: {
         //     mon: false,
         //     tues: false,
@@ -85,7 +85,7 @@ export const data: task[] = [
         id: 106,
         name: "say hi to dave",
         description: "dave",
-        endDate: new Date("11/27/2021").toUTCString(),
+        endDate: new Date("12/12/2021").toUTCString(),
         // repeat: {
         //     mon: false,
         //     tues: false,
