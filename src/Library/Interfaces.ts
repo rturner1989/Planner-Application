@@ -10,7 +10,7 @@ export type repeat = {
 };
 
 export interface task {
-    id: number;
+    id: string;
     name: string;
     description: string;
     endDate: string;

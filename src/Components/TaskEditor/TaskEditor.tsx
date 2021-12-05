@@ -7,13 +7,25 @@ interface props {
 }
 
 const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
+    // Functions
+    const makeID = () => {
+        let text = "";
+        let possible =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (let i = 0; i < 16; i++)
+            text += possible.charAt(
+                Math.floor(Math.random() * possible.length)
+            );
+        return text;
+    };
+
     // States
     const [taskInput, setTaskInput] = useState(
         formData
             ? formData
             : (): task => {
                   return {
-                      id: 0,
+                      id: makeID(),
                       name: "",
                       description: "",
                       endDate: new Date().toUTCString(),
@@ -155,7 +167,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     handleSubmit(taskInput);
                     setTaskInput((): task => {
                         return {
-                            id: 0,
+                            id: makeID(),
                             name: "",
                             description: "",
                             endDate: new Date().toUTCString(),
