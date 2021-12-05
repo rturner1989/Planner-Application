@@ -14,8 +14,8 @@ export interface task {
     name: string;
     description: string;
     endDate: string;
-    startTime?: string;
-    endTime?: string;
+    startTime: string;
+    endTime: string;
     // repeat?: repeat;
     // category: category;
 }

@@ -43,9 +43,8 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     <input
                         value={taskInput.name}
                         type="text"
-                        name="title"
-                        placeholder="title"
-                        required
+                        name="itle"
+                        placeholder="Title"
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -59,8 +58,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     <textarea
                         value={taskInput.description}
                         name="description"
-                        placeholder="description"
-                        required
+                        placeholder="Description"
                         onChange={(e) =>
                             setTaskInput({
                                 ...taskInput,
@@ -79,7 +77,6 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                             .substr(0, 10)}
                         type="date"
                         name="endDate"
-                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -94,7 +91,6 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         value={taskInput.startTime}
                         type="time"
                         name="startTime"
-                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
@@ -109,7 +105,6 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         value={taskInput.endTime}
                         type="time"
                         name="endTime"
-                        required
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
