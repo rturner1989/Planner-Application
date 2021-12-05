@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { data } from "../../../data";
 import { days } from "../../../Library/Enums";
 import { isDateSame, getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
@@ -23,78 +22,131 @@ const WeeklyOverview: React.FC<props> = ({
     taskFormData,
     setTaskFormData,
 }) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [count, setCount] = useState(1);
+
     const filterTasks = (tasks: task[], date: string) => {
         return tasks.filter((task) => {
             if (isDateSame(task.endDate, date)) return task;
         });
     };
 
-    // STATES
-
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(1);
     const [arrOfWeeks, setArrOfWeeks] = useState<week[][]>([
         // previous week
         [
-            { day: days.SUNDAY, date: getDayOfCurrentWeek(-7), tasks: [] },
-            { day: days.MONDAY, date: getDayOfCurrentWeek(-6), tasks: [] },
-            { day: days.TUESDAY, date: getDayOfCurrentWeek(-5), tasks: [] },
-            { day: days.WEDNESDAY, date: getDayOfCurrentWeek(-4), tasks: [] },
-            { day: days.THURSDAY, date: getDayOfCurrentWeek(-3), tasks: [] },
-            { day: days.FRIDAY, date: getDayOfCurrentWeek(-2), tasks: [] },
-            { day: days.SATURDAY, date: getDayOfCurrentWeek(-1), tasks: [] },
+            {
+                day: days.SUNDAY,
+                date: getDayOfCurrentWeek(-7),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-7)),
+            },
+            {
+                day: days.MONDAY,
+                date: getDayOfCurrentWeek(-6),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-6)),
+            },
+            {
+                day: days.TUESDAY,
+                date: getDayOfCurrentWeek(-5),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-5)),
+            },
+            {
+                day: days.WEDNESDAY,
+                date: getDayOfCurrentWeek(-4),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-4)),
+            },
+            {
+                day: days.THURSDAY,
+                date: getDayOfCurrentWeek(-3),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-3)),
+            },
+            {
+                day: days.FRIDAY,
+                date: getDayOfCurrentWeek(-2),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-2)),
+            },
+            {
+                day: days.SATURDAY,
+                date: getDayOfCurrentWeek(-1),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(-1)),
+            },
         ],
         // current week
         [
             {
                 day: days.SUNDAY,
                 date: getDayOfCurrentWeek(0),
-                tasks: filterTasks(data, getDayOfCurrentWeek(0)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(0)),
             },
             {
                 day: days.MONDAY,
                 date: getDayOfCurrentWeek(1),
-                tasks: filterTasks(data, getDayOfCurrentWeek(1)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(1)),
             },
             {
                 day: days.TUESDAY,
                 date: getDayOfCurrentWeek(2),
-                tasks: filterTasks(data, getDayOfCurrentWeek(2)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(2)),
             },
             {
                 day: days.WEDNESDAY,
                 date: getDayOfCurrentWeek(3),
-                tasks: filterTasks(data, getDayOfCurrentWeek(3)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(3)),
             },
             {
                 day: days.THURSDAY,
                 date: getDayOfCurrentWeek(4),
-                tasks: filterTasks(data, getDayOfCurrentWeek(4)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(4)),
             },
             {
                 day: days.FRIDAY,
                 date: getDayOfCurrentWeek(5),
-                tasks: filterTasks(data, getDayOfCurrentWeek(5)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(5)),
             },
             {
                 day: days.SATURDAY,
                 date: getDayOfCurrentWeek(6),
-                tasks: filterTasks(data, getDayOfCurrentWeek(6)),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(6)),
             },
         ],
         // next week
         [
-            { day: days.SUNDAY, date: getDayOfCurrentWeek(7), tasks: [] },
-            { day: days.MONDAY, date: getDayOfCurrentWeek(8), tasks: [] },
-            { day: days.TUESDAY, date: getDayOfCurrentWeek(9), tasks: [] },
-            { day: days.WEDNESDAY, date: getDayOfCurrentWeek(10), tasks: [] },
-            { day: days.THURSDAY, date: getDayOfCurrentWeek(11), tasks: [] },
-            { day: days.FRIDAY, date: getDayOfCurrentWeek(12), tasks: [] },
-            { day: days.SATURDAY, date: getDayOfCurrentWeek(13), tasks: [] },
+            {
+                day: days.SUNDAY,
+                date: getDayOfCurrentWeek(7),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(7)),
+            },
+            {
+                day: days.MONDAY,
+                date: getDayOfCurrentWeek(8),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(8)),
+            },
+            {
+                day: days.TUESDAY,
+                date: getDayOfCurrentWeek(9),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(9)),
+            },
+            {
+                day: days.WEDNESDAY,
+                date: getDayOfCurrentWeek(10),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(10)),
+            },
+            {
+                day: days.THURSDAY,
+                date: getDayOfCurrentWeek(11),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(11)),
+            },
+            {
+                day: days.FRIDAY,
+                date: getDayOfCurrentWeek(12),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(12)),
+            },
+            {
+                day: days.SATURDAY,
+                date: getDayOfCurrentWeek(13),
+                tasks: filterTasks(taskFormData, getDayOfCurrentWeek(13)),
+            },
         ],
     ]);
-
-    // ACTIONS (FUNCTIONS)
 
     const previousWeek = () => {
         if (count > 0) {
