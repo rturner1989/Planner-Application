@@ -166,31 +166,54 @@ const WeeklyOverview: React.FC<props> = ({
         setTaskFormData([...taskFormData, task]);
     };
 
+    const displayWeekString = () => {
+        switch (count) {
+            case 0:
+                return <p>Last Week</p>;
+            case 1:
+                return <p>This Week</p>;
+            case 2:
+                return <p>Next Week</p>;
+            default:
+                break;
+        }
+    };
+
     useEffect(() => {
         setArrOfWeeks(arrOfWeeksFunction());
     }, [taskFormData]);
 
     return (
         <div className="weekly-overview-container">
-            <button onClick={previousWeek}>prev</button>
-            <button onClick={nextWeek}>next</button>
-            <button onClick={() => setIsModalVisible(true)}>Add</button>
+            <div className="btn-group">
+                <button onClick={previousWeek}>prev</button>
+                {displayWeekString()}
+                <button onClick={nextWeek}>next</button>
+            </div>
+            <button className="add-btn" onClick={() => setIsModalVisible(true)}>
+                Add
+            </button>
             {isModalVisible && (
-                <ModalContainer handleClose={() => setIsModalVisible(false)}>
+                <ModalContainer
+                    modal={"additional-task-modal"}
+                    handleClose={() => setIsModalVisible(false)}
+                >
                     <TaskEditor formData={undefined} handleSubmit={addTask} />
                 </ModalContainer>
             )}
-            {arrOfWeeks[count].map((week, index) => {
-                return (
-                    <DailyOverview
-                        key={index}
-                        handleClick={setSelectedDay}
-                        day={week.day}
-                        date={week.date}
-                        tasks={week.tasks}
-                    />
-                );
-            })}
+            <div className="days">
+                {arrOfWeeks[count].map((week, index) => {
+                    return (
+                        <DailyOverview
+                            key={index}
+                            handleClick={setSelectedDay}
+                            day={week.day}
+                            date={week.date}
+                            tasks={week.tasks}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };

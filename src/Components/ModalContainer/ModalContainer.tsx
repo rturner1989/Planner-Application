@@ -1,13 +1,14 @@
 import React from "react";
 
 interface props {
+    modal: string;
     children: React.ReactNode;
     handleClose: () => void;
 }
 
-const ModalContainer: React.FC<props> = ({ children, handleClose }) => {
+const ModalContainer: React.FC<props> = ({ modal, children, handleClose }) => {
     return (
-        <div>
+        <div className={modal}>
             <button onClick={handleClose}>Close</button>
             {children}
         </div>

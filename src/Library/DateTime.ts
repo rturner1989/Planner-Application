@@ -8,6 +8,7 @@ export const isDateSame = (
     if (dateOne.getFullYear() !== dateTwo.getFullYear()) return false;
     if (dateOne.getMonth() !== dateTwo.getMonth()) return false;
     if (dateOne.getDate() !== dateTwo.getDate()) return false;
+
     return true;
 };
 export const getStartWeekDateString = (): string => {

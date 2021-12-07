@@ -20,7 +20,7 @@ const DailyOverview: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         >
             <div className="daily-day-date-container">
                 <h1 className="daily-day">{day}</h1>
-                <h2 className="daily-date">{date}</h2>
+                <h2 className="daily-date">{date.slice(4, 11)}</h2>
                 {isDateSame(date, todaysDate) && <h3>today</h3>}
             </div>
             <div className="daily-task-container">

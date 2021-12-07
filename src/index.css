@@ -1,0 +1,26 @@
+/* Application Container */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#root {
+    width: 100%;
+    height: 100%;
+}
+.App {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+/* Navbar */
+#navbar-container {
+    width: 5%;
+    max-width: 100px;
+}
+/* Content */
+#weekly-calender-container {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+}
