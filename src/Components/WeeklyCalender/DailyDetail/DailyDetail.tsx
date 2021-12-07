@@ -1,5 +1,9 @@
 import React from "react";
 
+// interface props {
+//     data: any;
+// }
+
 const DailyDetail = () => {
     return (
         <div className="daily-detail-container">

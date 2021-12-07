@@ -20,14 +20,41 @@
     flex-direction: column-reverse;
     width: 100%;
 }
+.daily-overview-container {
+    border: solid 1px green;
+    min-height: 250px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.container-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.daily-day-date-container {
+    width: 30%;
+}
+.daily-task-container {
+    width: 70%;
+    justify-content: space-evenly;
+}
+.daily-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+.daily-task-date-range {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
 /* Daily Detail */
 .daily-detail-container {
     width: 80%;
     border: solid 1px red;
-}
-
-.daily-overview-container {
-    border: solid 1px green;
-    min-height: 250px;
 }
