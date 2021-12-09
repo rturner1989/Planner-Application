@@ -1,23 +1,24 @@
 import { useState } from "react";
-import { days } from "../../Library/Enums";
-import DailyDetail from "./DailyDetail/DailyDetail";
-import WeeklyOverview from "./WeeklyOverview/WeeklyOverview";
+import DailyView from "./DailyView/DailyView";
+import WeeklyView from "./WeeklyView/WeeklyView";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 
 // Calender Container
 
 const WeeklyCalender = () => {
-    const [selectedDay, setSelectedDay] = useState<days>();
+    const [selectedDay, setSelectedDay] = useState<string>(
+        new Date().toUTCString()
+    );
     const [taskFormData, setTaskFormData] = useLocalStorage("taskList", []);
 
     return (
         <div id="weekly-calender-container">
-            <WeeklyOverview
+            <WeeklyView
                 setSelectedDay={setSelectedDay}
                 taskFormData={taskFormData}
                 setTaskFormData={setTaskFormData}
             />
-            {selectedDay && <DailyDetail />}
+            <DailyView date={selectedDay} tasks={taskFormData} />
         </div>
     );
 };

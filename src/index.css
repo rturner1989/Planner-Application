@@ -13,11 +13,6 @@
     flex-direction: row;
     width: 100%;
 }
-/* Navbar */
-#navbar-container {
-    width: 5%;
-    max-width: 100px;
-}
 /* Content */
 #weekly-calender-container {
     display: flex;
