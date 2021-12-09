@@ -23,7 +23,7 @@ const WeeklyOverview: React.FC<props> = ({
     setTaskFormData,
 }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(1);
+    const [weekCount, setWeekCount] = useState(1);
 
     const filterTasks = (tasks: task[], date: string) => {
         return tasks.filter((task) => {
@@ -153,13 +153,13 @@ const WeeklyOverview: React.FC<props> = ({
     const [arrOfWeeks, setArrOfWeeks] = useState<week[][]>(arrOfWeeksFunction);
 
     const previousWeek = () => {
-        if (count > 0) {
-            setCount(count - 1);
+        if (weekCount > 0) {
+            setWeekCount(weekCount - 1);
         }
     };
     const nextWeek = () => {
-        if (count < arrOfWeeks.length - 1) {
-            setCount(count + 1);
+        if (weekCount < arrOfWeeks.length - 1) {
+            setWeekCount(weekCount + 1);
         }
     };
     const addTask = (task: task) => {
@@ -167,7 +167,7 @@ const WeeklyOverview: React.FC<props> = ({
     };
 
     const displayWeekString = () => {
-        switch (count) {
+        switch (weekCount) {
             case 0:
                 return <p>Last Week</p>;
             case 1:
@@ -202,7 +202,7 @@ const WeeklyOverview: React.FC<props> = ({
                 </ModalContainer>
             )}
             <div className="days">
-                {arrOfWeeks[count].map((week, index) => {
+                {arrOfWeeks[weekCount].map((week, index) => {
                     return (
                         <DailyOverview
                             key={index}
