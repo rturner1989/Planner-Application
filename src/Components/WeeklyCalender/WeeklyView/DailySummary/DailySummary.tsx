@@ -15,9 +15,32 @@ interface props {
     tasks: task[];
 }
 
+enum timeState {
+    PAST = "past",
+    PRESENT = "present",
+    FUTURE = "future",
+}
+
 const todaysDate = new Date().toUTCString();
 
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
+    const isPastPresentFuture = (): timeState => {
+        const today = new Date(todaysDate);
+        const comparisonDate = new Date(date);
+        if (today.getFullYear() < comparisonDate.getFullYear())
+            return timeState.FUTURE;
+        if (today.getFullYear() > comparisonDate.getFullYear())
+            return timeState.PAST;
+
+        if (today.getMonth() < comparisonDate.getMonth())
+            return timeState.FUTURE;
+        if (today.getMonth() > comparisonDate.getMonth()) return timeState.PAST;
+
+        if (today.getDate() < comparisonDate.getDate()) return timeState.FUTURE;
+        if (today.getDate() > comparisonDate.getDate()) return timeState.PAST;
+        return timeState.PRESENT;
+    };
+
     return (
         <div
             className="daily-overview-container"
@@ -29,6 +52,8 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                 {isDateSame(date, todaysDate) && <h3>today</h3>}
             </div>
             <div className="daily-task-container container-child">
+                {/* if past return length of tasks array */}
+
                 {tasks.map((task) => {
                     return (
                         <div className="daily-task" key={task.id}>

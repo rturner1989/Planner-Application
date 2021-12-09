@@ -16,4 +16,13 @@ export const filterTasksByDate = (tasks: task[], date: string) => {
     });
 };
 
-const filterTasksByDateAndTime = (tasks: task[]) => {};
+const filterTasksByTime = (tasks: task[], time: string) => {
+    // 12:00 - split string by : for both tasks.endTime and time
+    // compare time to endTime index[0] (hours)
+    // if time Hours is less than endTime hours then that means that task is in the future
+    // parseInt
+
+    //  time parameter is going to be the current time.
+    //  anything before that time, we wont return, time after we will return.
+    return tasks.filter((task) => {});
+};
