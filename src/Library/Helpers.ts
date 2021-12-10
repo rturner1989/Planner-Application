@@ -26,8 +26,14 @@ export const filterTasksByTime = (tasks: task[], time: string) => {
     //  anything before that time, we wont return, time after we will return.
     return tasks.filter((task) => {
         const [splitEndHour, splitEndMins] = task.endTime.split(":");
-        const [splitComparisonTimeHour, splitComparisonTimeMins] = time
-            .slice(17, 22)
-            .split(":");
+        const [splitComparisonTimeHour, splitComparisonTimeMins] =
+            time.split(":");
+
+        // future
+        if (splitEndHour > splitComparisonTimeHour) return task;
+        // same hour but future minutes
+        if (splitEndHour === splitComparisonTimeHour) {
+            if (splitEndMins >= splitComparisonTimeMins) return task;
+        }
     });
 };

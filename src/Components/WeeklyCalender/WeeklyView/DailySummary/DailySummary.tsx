@@ -2,6 +2,7 @@ import React from "react";
 import { days } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
+import { filterTasksByTime } from "../../../../Library/Helpers";
 
 // on elapsed days - day and date move to middle, on hover text indicating how many tasks were on that day.
 
@@ -22,6 +23,7 @@ enum timeState {
 }
 
 const todaysDate = new Date().toUTCString();
+const currentTime = todaysDate.slice(17, 22);
 
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
     const isPastPresentFuture = (): timeState => {
@@ -41,6 +43,49 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         return timeState.PRESENT;
     };
 
+    const getDaysTasks = () => {
+        switch (isPastPresentFuture()) {
+            case timeState.PAST:
+                return <p>Tasks - {tasks.length}</p>;
+            case timeState.PRESENT:
+                const filteredPresentTasks = filterTasksByTime(
+                    tasks,
+                    currentTime
+                );
+                return filteredPresentTasks.map((task) => {
+                    return (
+                        <div className="daily-task" key={task.id}>
+                            <h3 className="daily-task-title">{task.name}</h3>
+                            <div className="daily-task-date-range">
+                                <p>{task.startTime} </p>
+                                <p>-</p>
+                                <p>{task.endTime}</p>
+                            </div>
+                        </div>
+                    );
+                });
+            case timeState.FUTURE:
+                const filteredFutureTasks = filterTasksByTime(
+                    tasks,
+                    currentTime
+                );
+                return filteredFutureTasks.map((task) => {
+                    return (
+                        <div className="daily-task" key={task.id}>
+                            <h3 className="daily-task-title">{task.name}</h3>
+                            <div className="daily-task-date-range">
+                                <p>{task.startTime} </p>
+                                <p>-</p>
+                                <p>{task.endTime}</p>
+                            </div>
+                        </div>
+                    );
+                });
+            default:
+                break;
+        }
+    };
+
     return (
         <div
             className="daily-overview-container"
@@ -52,20 +97,7 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                 {isDateSame(date, todaysDate) && <h3>today</h3>}
             </div>
             <div className="daily-task-container container-child">
-                {/* if past return length of tasks array */}
-
-                {tasks.map((task) => {
-                    return (
-                        <div className="daily-task" key={task.id}>
-                            <h3 className="daily-task-title">{task.name}</h3>
-                            <div className="daily-task-date-range">
-                                <p>{task.startTime} </p>
-                                <p>-</p>
-                                <p>{task.endTime}</p>
-                            </div>
-                        </div>
-                    );
-                })}
+                {getDaysTasks()}
             </div>
         </div>
     );
