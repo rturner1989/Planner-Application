@@ -1,6 +1,5 @@
 import React from "react";
 import { task } from "../../../Library/Interfaces";
-import { filterTasksByDate } from "../../../Library/Helpers";
 
 interface props {
     date: string;

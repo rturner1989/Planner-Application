@@ -24,6 +24,7 @@ enum timeState {
 
 const todaysDate = new Date().toUTCString();
 const currentTime = todaysDate.slice(17, 22);
+const midnight = "00:00";
 
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
     const isPastPresentFuture = (): timeState => {
@@ -65,10 +66,7 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                     );
                 });
             case timeState.FUTURE:
-                const filteredFutureTasks = filterTasksByTime(
-                    tasks,
-                    currentTime
-                );
+                const filteredFutureTasks = filterTasksByTime(tasks, midnight);
                 return filteredFutureTasks.map((task) => {
                     return (
                         <div className="daily-task" key={task.id}>
