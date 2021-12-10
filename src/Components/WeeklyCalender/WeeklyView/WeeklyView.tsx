@@ -241,6 +241,9 @@ const WeeklyView: React.FC<props> = ({
         setArrOfWeeks(arrOfWeeksFunction());
     }, [taskFormData]);
 
+    const time = arrOfWeeks[0][0].date;
+    console.log(time.slice(17, 22).split(":"));
+
     return (
         <div className="weekly-overview-container">
             <div className="btn-group">
