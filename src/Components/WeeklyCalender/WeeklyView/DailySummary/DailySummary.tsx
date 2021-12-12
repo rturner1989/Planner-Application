@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { days } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
@@ -27,6 +27,8 @@ const currentTime = todaysDate.slice(17, 22);
 const midnight = "00:00";
 
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
+    const [isTaskHover, setIsTaskHover] = useState(false);
+
     const isPastPresentFuture = (): timeState => {
         const today = new Date(todaysDate);
         const comparisonDate = new Date(date);
@@ -44,41 +46,89 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         return timeState.PRESENT;
     };
 
+    const toggleTaskHover = () => {
+        setIsTaskHover(!isTaskHover);
+    };
+
     const getDaysTasks = () => {
         switch (isPastPresentFuture()) {
             case timeState.PAST:
-                return <p>Tasks - {tasks.length}</p>;
+                const filteredPastTasks = filterTasksByTime(tasks, currentTime);
+                if (isTaskHover === false) {
+                    return (
+                        <div
+                            className="daily-task-placeholder"
+                            onMouseEnter={toggleTaskHover}
+                            onMouseLeave={toggleTaskHover}
+                        >
+                            <p>Past</p>
+                            <p>Tasks - {tasks.length}</p>
+                            <p>(Hover to show more)</p>
+                        </div>
+                    );
+                } else {
+                    if (filteredPastTasks.length === 0) {
+                        return (
+                            <div>
+                                <p>No Tasks today</p>
+                            </div>
+                        );
+                    } else {
+                        return filteredPastTasks.map((task) => {
+                            return (
+                                <div className="daily-task" key={task.id}>
+                                    <h3 className="daily-task-title">
+                                        {task.name}
+                                    </h3>
+                                    <div className="daily-task-date-range">
+                                        <p>{task.startTime} </p>
+                                        <p>-</p>
+                                        <p>{task.endTime}</p>
+                                    </div>
+                                </div>
+                            );
+                        });
+                    }
+                }
             case timeState.PRESENT:
                 const filteredPresentTasks = filterTasksByTime(
                     tasks,
                     currentTime
                 );
-                return filteredPresentTasks.map((task) => {
-                    return (
-                        <div className="daily-task" key={task.id}>
-                            <h3 className="daily-task-title">{task.name}</h3>
-                            <div className="daily-task-date-range">
-                                <p>{task.startTime} </p>
-                                <p>-</p>
-                                <p>{task.endTime}</p>
+                if (filteredPresentTasks.length === 0) {
+                    if (isTaskHover === false) {
+                        return (
+                            <div onMouseEnter={toggleTaskHover}>
+                                <p>No Tasks today</p>
                             </div>
-                        </div>
-                    );
-                });
+                        );
+                    } else {
+                        return (
+                            <div>
+                                {/* add the add task function here */}
+                                <button>Add/+</button>
+                            </div>
+                        );
+                    }
+                } else {
+                    return filteredPresentTasks.map((task) => {
+                        return (
+                            <div className="daily-task" key={task.id}>
+                                <h3 className="daily-task-title">
+                                    {task.name}
+                                </h3>
+                                <div className="daily-task-date-range">
+                                    <p>{task.startTime} </p>
+                                    <p>-</p>
+                                    <p>{task.endTime}</p>
+                                </div>
+                            </div>
+                        );
+                    });
+                }
             case timeState.FUTURE:
                 const filteredFutureTasks = filterTasksByTime(tasks, midnight);
-                return filteredFutureTasks.map((task) => {
-                    return (
-                        <div className="daily-task" key={task.id}>
-                            <h3 className="daily-task-title">{task.name}</h3>
-                            <div className="daily-task-date-range">
-                                <p>{task.startTime} </p>
-                                <p>-</p>
-                                <p>{task.endTime}</p>
-                            </div>
-                        </div>
-                    );
-                });
+                return <p>Future</p>;
             default:
                 break;
         }
@@ -94,7 +144,10 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                 <h2 className="daily-date">{date.slice(4, 11)}</h2>
                 {isDateSame(date, todaysDate) && <h3>today</h3>}
             </div>
-            <div className="daily-task-container container-child">
+            <div
+                className="daily-task-container container-child"
+                onMouseLeave={() => setIsTaskHover(false)}
+            >
                 {getDaysTasks()}
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { days } from "../../../Library/Enums";
-import { isDateSame, getDayOfCurrentWeek } from "../../../Library/DateTime";
+import { getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import { filterTasksByDate } from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";

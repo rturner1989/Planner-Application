@@ -17,23 +17,15 @@ export const filterTasksByDate = (tasks: task[], date: string) => {
 };
 
 export const filterTasksByTime = (tasks: task[], time: string) => {
-    // 12:00 - split string by : for both tasks.endTime and time
-    // compare time to endTime index[0] (hours)
-    // if time Hours is less than endTime hours then that means that task is in the future
-    // parseInt
-
-    //  time parameter is going to be the current time.
-    //  anything before that time, we wont return, time after we will return.
     return tasks.filter((task) => {
         const [splitEndHour, splitEndMins] = task.endTime.split(":");
         const [splitComparisonTimeHour, splitComparisonTimeMins] =
             time.split(":");
 
-        // future
         if (splitEndHour > splitComparisonTimeHour) return task;
-        // same hour but future minutes
         if (splitEndHour === splitComparisonTimeHour) {
             if (splitEndMins >= splitComparisonTimeMins) return task;
         }
+        return task;
     });
 };
