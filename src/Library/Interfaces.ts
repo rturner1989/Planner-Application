@@ -1,4 +1,5 @@
 export type category = { id: number; name: string; colour: string };
+
 export type repeat = {
     mon: boolean;
     tues: boolean;

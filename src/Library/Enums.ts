@@ -7,3 +7,9 @@ export enum days {
     SATURDAY = "Sat",
     SUNDAY = "Sun",
 }
+
+export enum timeState {
+    PAST = "past",
+    PRESENT = "present",
+    FUTURE = "future",
+}

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { days } from "../../../../Library/Enums";
+import { days, timeState } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
 import { filterTasksByTime } from "../../../../Library/Helpers";
-
-// on elapsed days - day and date move to middle, on hover text indicating how many tasks were on that day.
 
 // past present and future, past - not filter, as above, present - filtered tasks due after curent time, future filtered tasks due after midnight
 // filter for maximum of 3
@@ -14,12 +12,6 @@ interface props {
     day: days;
     date: string;
     tasks: task[];
-}
-
-enum timeState {
-    PAST = "past",
-    PRESENT = "present",
-    FUTURE = "future",
 }
 
 const todaysDate = new Date().toUTCString();
@@ -91,7 +83,6 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                         <div
                             className="daily-task-placeholder"
                             onMouseEnter={toggleTaskHover}
-                            onMouseLeave={toggleTaskHover}
                         >
                             <p>Past</p>
                             <p>Tasks - {tasks.length}</p>
