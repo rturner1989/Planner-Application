@@ -50,6 +50,38 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         setIsTaskHover(!isTaskHover);
     };
 
+    const filteredPresentFutureTasks = (filteredTask: task[]) => {
+        if (filteredTask.length === 0) {
+            if (isTaskHover === false) {
+                return (
+                    <div onMouseEnter={toggleTaskHover}>
+                        <p>No Tasks today</p>
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        {/* add the add task function here */}
+                        <button>Add/+</button>
+                    </div>
+                );
+            }
+        } else {
+            return filteredTask.map((task) => {
+                return (
+                    <div className="daily-task" key={task.id}>
+                        <h3 className="daily-task-title">{task.name}</h3>
+                        <div className="daily-task-date-range">
+                            <p>{task.startTime} </p>
+                            <p>-</p>
+                            <p>{task.endTime}</p>
+                        </div>
+                    </div>
+                );
+            });
+        }
+    };
+
     const getDaysTasks = () => {
         switch (isPastPresentFuture()) {
             case timeState.PAST:
@@ -95,40 +127,10 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                     tasks,
                     currentTime
                 );
-                if (filteredPresentTasks.length === 0) {
-                    if (isTaskHover === false) {
-                        return (
-                            <div onMouseEnter={toggleTaskHover}>
-                                <p>No Tasks today</p>
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <div>
-                                {/* add the add task function here */}
-                                <button>Add/+</button>
-                            </div>
-                        );
-                    }
-                } else {
-                    return filteredPresentTasks.map((task) => {
-                        return (
-                            <div className="daily-task" key={task.id}>
-                                <h3 className="daily-task-title">
-                                    {task.name}
-                                </h3>
-                                <div className="daily-task-date-range">
-                                    <p>{task.startTime} </p>
-                                    <p>-</p>
-                                    <p>{task.endTime}</p>
-                                </div>
-                            </div>
-                        );
-                    });
-                }
+                return filteredPresentFutureTasks(filteredPresentTasks);
             case timeState.FUTURE:
                 const filteredFutureTasks = filterTasksByTime(tasks, midnight);
-                return <p>Future</p>;
+                return filteredPresentFutureTasks(filteredFutureTasks);
             default:
                 break;
         }
