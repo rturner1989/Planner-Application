@@ -1,5 +1,6 @@
 import { isDateSame } from "./DateTime";
 import { task } from "./Interfaces";
+import { timeState } from "./Enums";
 
 export const getDayFromUTC = (utc: number) => {
     const date = new Date(utc);
@@ -18,14 +19,32 @@ export const filterTasksByDate = (tasks: task[], date: string) => {
 
 export const filterTasksByTime = (tasks: task[], time: string) => {
     return tasks.filter((task) => {
-        const [splitEndHour, splitEndMins] = task.endTime.split(":");
-        const [splitComparisonTimeHour, splitComparisonTimeMins] =
-            time.split(":");
+        const [hourOne, minOne] = task.endTime.split(":");
+        const [hourTwo, minTwo] = time.split(":");
 
-        if (splitEndHour > splitComparisonTimeHour) return task;
-        if (splitEndHour === splitComparisonTimeHour) {
-            if (splitEndMins >= splitComparisonTimeMins) return task;
+        if (parseInt(hourOne) > parseInt(hourTwo)) return task;
+        if (parseInt(hourOne) === parseInt(hourTwo)) {
+            if (parseInt(minOne) >= parseInt(minTwo)) return task;
         }
-        return task;
     });
+};
+
+export const isPastPresentFuture = (
+    firstDate: string,
+    secondDate: string
+): timeState => {
+    const today = new Date(firstDate);
+    const comparisonDate = new Date(secondDate);
+
+    if (today.getFullYear() < comparisonDate.getFullYear())
+        return timeState.FUTURE;
+    if (today.getFullYear() > comparisonDate.getFullYear())
+        return timeState.PAST;
+
+    if (today.getMonth() < comparisonDate.getMonth()) return timeState.FUTURE;
+    if (today.getMonth() > comparisonDate.getMonth()) return timeState.PAST;
+
+    if (today.getDate() < comparisonDate.getDate()) return timeState.FUTURE;
+    if (today.getDate() > comparisonDate.getDate()) return timeState.PAST;
+    return timeState.PRESENT;
 };
