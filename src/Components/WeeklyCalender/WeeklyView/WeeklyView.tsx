@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { days } from "../../../Library/Enums";
 import { getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
-import { filterTasksByDate } from "../../../Library/Helpers";
+import { filterTasksByDate, makeID } from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";
 import ModalContainer from "../../ModalContainer/ModalContainer";
 import TaskEditor from "../../TaskEditor/TaskEditor";
@@ -260,10 +260,10 @@ const WeeklyView: React.FC<props> = ({
                 </ModalContainer>
             )}
             <div className="days">
-                {arrOfWeeks[weekCount].map((week, index) => {
+                {arrOfWeeks[weekCount].map((week) => {
                     return (
                         <DailySummary
-                            key={index}
+                            key={makeID()}
                             handleClick={setSelectedDay}
                             day={week.day}
                             date={week.date}

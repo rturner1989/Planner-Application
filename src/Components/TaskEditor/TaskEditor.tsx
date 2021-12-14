@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { task } from "../../Library/Interfaces";
+import { makeID } from "../../Library/Helpers";
 
 interface props {
     formData: task | undefined;
@@ -8,16 +9,6 @@ interface props {
 
 const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
     // Functions
-    const makeID = () => {
-        let text = "";
-        let possible =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (let i = 0; i < 16; i++)
-            text += possible.charAt(
-                Math.floor(Math.random() * possible.length)
-            );
-        return text;
-    };
 
     // States
     const [taskInput, setTaskInput] = useState(
