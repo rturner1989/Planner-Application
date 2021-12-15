@@ -8,9 +8,6 @@ interface props {
 }
 
 const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
-    // Functions
-
-    // States
     const [taskInput, setTaskInput] = useState(
         formData
             ? formData

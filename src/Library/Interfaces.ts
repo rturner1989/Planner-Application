@@ -18,6 +18,4 @@ export interface task {
     startTime: string;
     endTime: string;
     color: string;
-    // repeat?: repeat;
-    // category: category;
 }
