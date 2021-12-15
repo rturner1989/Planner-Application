@@ -17,6 +17,7 @@ export interface task {
     endDate: string;
     startTime: string;
     endTime: string;
+    color: string;
     // repeat?: repeat;
     // category: category;
 }

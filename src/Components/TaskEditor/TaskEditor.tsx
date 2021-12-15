@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { task } from "../../Library/Interfaces";
-import { makeID } from "../../Library/Helpers";
+import { makeColourCode, makeID } from "../../Library/Helpers";
 
 interface props {
     formData: task | undefined;
@@ -22,6 +22,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                       endDate: new Date().toUTCString(),
                       startTime: "12:00",
                       endTime: "12:00",
+                      color: makeColourCode(),
                   };
               }
     );
@@ -105,47 +106,6 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     />
                 </label>
             </div>
-            {/* <div>
-                <p>Repeat:</p>
-                <label htmlFor="">
-                    Monday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Tuesday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Wednesday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Thursday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Friday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Saturday
-                    <input type="checkbox" />
-                </label>
-                <label htmlFor="">
-                    Sunday
-                    <input type="checkbox" />
-                </label>
-            </div>
-            <div>
-                <label htmlFor="">
-                    Category:
-                    <select name="" id="">
-                        <option value="">Task</option>
-                        <option value="">Appointment</option>
-                        <option value="">To Do</option>
-                    </select>
-                </label>
-            </div> */}
             <button
                 type="submit"
                 onClick={(e) => {
@@ -159,6 +119,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                             endDate: new Date().toUTCString(),
                             startTime: "12:00",
                             endTime: "12:00",
+                            color: makeColourCode(),
                         };
                     });
                 }}

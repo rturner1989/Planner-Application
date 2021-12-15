@@ -18,13 +18,16 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
 
     useEffect(() => {
         setDailyViewFilteredTasts(filterTasksByDate(tasks, date));
-    }, [date]);
+    }, [date, tasks]);
 
     return (
         <div className="daily-detail-container">
             {sortedTasks.map((task) => {
+                const style = {
+                    color: task.color,
+                };
                 return (
-                    <div key={makeID()}>
+                    <div key={makeID()} style={style}>
                         <h1>{task.name}</h1>
                         <p>{task.description}</p>
                         <p>{task.startTime}</p>
