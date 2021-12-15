@@ -2,15 +2,6 @@ import { isDateSame } from "./DateTime";
 import { task } from "./Interfaces";
 import { timeState } from "./Enums";
 
-export const getDayFromUTC = (utc: number) => {
-    const date = new Date(utc);
-    const string = date.toLocaleString("default", {
-        day: "numeric",
-        // month: "long",
-        // year: "numeric",
-    });
-    return string;
-};
 export const filterTasksByDate = (tasks: task[], date: string) => {
     return tasks.filter((task) => {
         if (isDateSame(task.endDate, date)) return task;
@@ -39,12 +30,6 @@ export const filterElapsedTasks = (tasks: task[], time: string) => {
             if (parseInt(minOne) <= parseInt(minTwo)) return task;
         }
     });
-};
-
-export const sortTasksByStartTime = (a: string, b: string) => {
-    if (a > b) return -1;
-    if (a < b) return 1;
-    return 0;
 };
 
 export const isPastPresentFuture = (

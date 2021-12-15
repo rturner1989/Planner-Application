@@ -8,9 +8,6 @@ import {
     filterElapsedTasks,
 } from "../../../../Library/Helpers";
 
-// past present and future, past - not filter, as above, present - filtered tasks due after curent time, future filtered tasks due after midnight
-// filter for maximum of 3
-
 interface props {
     handleClick: React.Dispatch<React.SetStateAction<string>>;
     day: days;
@@ -20,8 +17,7 @@ interface props {
 
 const todaysDate = new Date().toUTCString();
 const currentTime = todaysDate.slice(17, 22);
-const midnight = new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
-console.log(midnight);
+// const midnight = new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
 
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
@@ -89,7 +85,6 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                     );
                 });
             case timeState.FUTURE:
-                // sort takes variable by endTime, then slice sorted array
                 if (tasks.slice(0, 3).length === 0) {
                     if (!isTaskHover) {
                         return (
@@ -105,7 +100,12 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                         </div>
                     );
                 }
-                return filteredTasks.map((task) => {
+                const sortedTasks = filteredTasks.sort((a, b) => {
+                    if (a.startTime > b.startTime) return 1;
+                    if (a.startTime < b.startTime) return -1;
+                    return 0;
+                });
+                return sortedTasks.map((task) => {
                     return (
                         <div className="daily-task" key={task.id}>
                             <h3 className="daily-task-title">{task.name}</h3>
