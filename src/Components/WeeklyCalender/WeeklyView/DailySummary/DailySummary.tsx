@@ -5,6 +5,7 @@ import { isDateSame } from "../../../../Library/DateTime";
 import {
     filterTasksByTime,
     isPastPresentFuture,
+    filterElapsedTasks,
 } from "../../../../Library/Helpers";
 
 // past present and future, past - not filter, as above, present - filtered tasks due after curent time, future filtered tasks due after midnight
@@ -25,6 +26,7 @@ console.log(midnight);
 const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
+    const [elapsedTasks, setElapsedTasks] = useState(tasks);
     const [timeTense, setTimeTense] = useState(() =>
         isPastPresentFuture(todaysDate, date)
     );
@@ -37,44 +39,16 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
         let interval: number | undefined = undefined;
         if (timeTense === timeState.PRESENT) {
             setFilteredTasks(filterTasksByTime(tasks, currentTime));
+            setElapsedTasks(filterElapsedTasks(tasks, currentTime));
             interval = window.setInterval(() => {
                 setFilteredTasks(filterTasksByTime(tasks, currentTime));
+                setElapsedTasks(filterElapsedTasks(tasks, currentTime));
             }, 60000);
         }
         return () => {
             if (interval) clearInterval(interval);
         };
     }, [tasks]);
-
-    const filteredPresentFutureTasks = (filteredTask: task[]) => {
-        if (filteredTask.length === 0) {
-            if (!isTaskHover) {
-                return (
-                    <div onMouseEnter={toggleTaskHover}>
-                        <p>No Tasks today</p>
-                    </div>
-                );
-            }
-            return (
-                <div>
-                    {/* add the add task function here */}
-                    <button>Add/+</button>
-                </div>
-            );
-        }
-        return filteredTask.map((task) => {
-            return (
-                <div className="daily-task" key={task.id}>
-                    <h3 className="daily-task-title">{task.name}</h3>
-                    <div className="daily-task-date-range">
-                        <p>{task.startTime}</p>
-                        <p>-</p>
-                        <p>{task.endTime}</p>
-                    </div>
-                </div>
-            );
-        });
-    };
 
     const getDaysTasks = () => {
         switch (timeTense) {
@@ -86,10 +60,63 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                     </div>
                 );
             case timeState.PRESENT:
-                return filteredPresentFutureTasks(filteredTasks);
+                if (filteredTasks.length === 0) {
+                    if (!isTaskHover) {
+                        return (
+                            <div onMouseEnter={toggleTaskHover}>
+                                <p>Present</p>
+                                <p>ElapsedTasks - {elapsedTasks.length}</p>
+                            </div>
+                        );
+                    }
+                    return (
+                        <div>
+                            {/* add the add task function here */}
+                            <button>Add/+</button>
+                        </div>
+                    );
+                }
+                return filteredTasks.map((task) => {
+                    return (
+                        <div className="daily-task" key={task.id}>
+                            <h3 className="daily-task-title">{task.name}</h3>
+                            <div className="daily-task-date-range">
+                                <p>{task.startTime}</p>
+                                <p>-</p>
+                                <p>{task.endTime}</p>
+                            </div>
+                        </div>
+                    );
+                });
             case timeState.FUTURE:
                 // sort takes variable by endTime, then slice sorted array
-                return filteredPresentFutureTasks(tasks.slice(0, 3));
+                if (tasks.slice(0, 3).length === 0) {
+                    if (!isTaskHover) {
+                        return (
+                            <div onMouseEnter={toggleTaskHover}>
+                                <p>No Tasks today</p>
+                            </div>
+                        );
+                    }
+                    return (
+                        <div>
+                            {/* add the add task function here */}
+                            <button>Add/+</button>
+                        </div>
+                    );
+                }
+                return filteredTasks.map((task) => {
+                    return (
+                        <div className="daily-task" key={task.id}>
+                            <h3 className="daily-task-title">{task.name}</h3>
+                            <div className="daily-task-date-range">
+                                <p>{task.startTime}</p>
+                                <p>-</p>
+                                <p>{task.endTime}</p>
+                            </div>
+                        </div>
+                    );
+                });
         }
     };
 

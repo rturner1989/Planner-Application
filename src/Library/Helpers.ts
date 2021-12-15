@@ -29,6 +29,24 @@ export const filterTasksByTime = (tasks: task[], time: string) => {
     });
 };
 
+export const filterElapsedTasks = (tasks: task[], time: string) => {
+    return tasks.filter((task) => {
+        const [hourOne, minOne] = task.endTime.split(":");
+        const [hourTwo, minTwo] = time.split(":");
+
+        if (parseInt(hourOne) < parseInt(hourTwo)) return task;
+        if (parseInt(hourOne) === parseInt(hourTwo)) {
+            if (parseInt(minOne) <= parseInt(minTwo)) return task;
+        }
+    });
+};
+
+export const sortTasksByStartTime = (a: string, b: string) => {
+    if (a > b) return -1;
+    if (a < b) return 1;
+    return 0;
+};
+
 export const isPastPresentFuture = (
     firstDate: string,
     secondDate: string
