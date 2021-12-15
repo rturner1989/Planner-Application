@@ -20,21 +20,28 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
         setDailyViewFilteredTasts(filterTasksByDate(tasks, date));
     }, [date, tasks]);
 
+    if (dailyViewFilteredTasts.length !== 0) {
+        return (
+            <div className="daily-detail-container">
+                {sortedTasks.map((task) => {
+                    const style = {
+                        color: task.color,
+                    };
+                    return (
+                        <div key={makeID()} style={style}>
+                            <h1>{task.name}</h1>
+                            <p>{task.description}</p>
+                            <p>{task.startTime}</p>
+                            <p>{task.endTime}</p>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
     return (
-        <div className="daily-detail-container">
-            {sortedTasks.map((task) => {
-                const style = {
-                    color: task.color,
-                };
-                return (
-                    <div key={makeID()} style={style}>
-                        <h1>{task.name}</h1>
-                        <p>{task.description}</p>
-                        <p>{task.startTime}</p>
-                        <p>{task.endTime}</p>
-                    </div>
-                );
-            })}
+        <div>
+            <h1>No Tasks</h1>
         </div>
     );
 };
