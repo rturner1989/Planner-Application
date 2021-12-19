@@ -12,6 +12,9 @@ const WeeklyCalender = () => {
     const [selectedDay, setSelectedDay] = useState<string>(
         new Date().toUTCString()
     );
+    const [updateSelectedDate, setUpdateSelectedDate] = useState<string>(
+        new Date().toUTCString()
+    );
     const [taskFormData, setTaskFormData] = useLocalStorage("taskList", []);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -25,6 +28,7 @@ const WeeklyCalender = () => {
                 isModalVisible={isModalVisible}
                 setIsModalVisible={setIsModalVisible}
                 setSelectedDay={setSelectedDay}
+                setUpdateSelectedDate={setUpdateSelectedDate}
                 taskFormData={taskFormData}
                 setTaskFormData={setTaskFormData}
             />
@@ -36,7 +40,7 @@ const WeeklyCalender = () => {
                     <TaskEditor
                         formData={undefined}
                         handleSubmit={addTask}
-                        date={selectedDay}
+                        date={updateSelectedDate}
                     />
                 </ModalContainer>
             )}

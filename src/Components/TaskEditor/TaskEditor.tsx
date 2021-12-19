@@ -18,7 +18,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                       name: "",
                       description: "",
                       endDate: new Date().toUTCString(),
-                      startTime: new Date().toUTCString().slice(16, 22),
+                      startTime: "12:00",
                       endTime: "12:00",
                       color: makeColourCode(),
                   };

@@ -22,6 +22,7 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-width: thin;
 }
 .daily-overview-container {
@@ -36,6 +37,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.add-task-btn-container {
+    height: 100%;
+    width: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    visibility: hidden;
+    transition: width 0.1s ease-in-out;
+}
+.toggle-active {
+    width: 15%;
+    visibility: visible;
 }
 .daily-day-date-container {
     width: 30%;

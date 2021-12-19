@@ -11,6 +11,7 @@ interface props {
     taskFormData: task[];
     setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
     setSelectedDay: React.Dispatch<React.SetStateAction<string>>;
+    setUpdateSelectedDate: React.Dispatch<React.SetStateAction<string>>;
 }
 interface week {
     day: days;
@@ -19,6 +20,7 @@ interface week {
 }
 
 const WeeklyView: React.FC<props> = ({
+    setUpdateSelectedDate,
     isModalVisible,
     setIsModalVisible,
     setSelectedDay,
@@ -252,6 +254,7 @@ const WeeklyView: React.FC<props> = ({
                         <DailySummary
                             key={makeID()}
                             handleClick={setSelectedDay}
+                            handleDateUpdate={setUpdateSelectedDate}
                             day={week.day}
                             date={week.date}
                             tasks={week.tasks}

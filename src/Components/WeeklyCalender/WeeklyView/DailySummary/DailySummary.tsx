@@ -9,6 +9,7 @@ import {
 } from "../../../../Library/Helpers";
 
 interface props {
+    handleDateUpdate: React.Dispatch<React.SetStateAction<string>>;
     setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
     handleClick: React.Dispatch<React.SetStateAction<string>>;
     day: days;
@@ -21,6 +22,7 @@ const currentTime = todaysDate.slice(17, 22);
 // const midnight = new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
 
 const DailySummary: React.FC<props> = ({
+    handleDateUpdate,
     setIsModalVisible,
     handleClick,
     day,
@@ -64,24 +66,10 @@ const DailySummary: React.FC<props> = ({
                 );
             case timeState.PRESENT:
                 if (filteredTasks.length === 0) {
-                    if (!isTaskHover) {
-                        return (
-                            <div onMouseEnter={toggleTaskHover}>
-                                <p>Present</p>
-                                <p>ElapsedTasks - {elapsedTasks.length}</p>
-                            </div>
-                        );
-                    }
                     return (
-                        <div className="add-task-btn-container">
-                            <button
-                                onClick={() => {
-                                    setIsModalVisible(true);
-                                    handleClick(date);
-                                }}
-                            >
-                                Add/+
-                            </button>
+                        <div>
+                            <p>Present</p>
+                            <p>ElapsedTasks - {elapsedTasks.length}</p>
                         </div>
                     );
                 }
@@ -99,18 +87,9 @@ const DailySummary: React.FC<props> = ({
                 });
             case timeState.FUTURE:
                 if (tasks.slice(0, 3).length === 0) {
-                    if (!isTaskHover) {
-                        return (
-                            <div onMouseEnter={toggleTaskHover}>
-                                <p>No Tasks today</p>
-                            </div>
-                        );
-                    }
                     return (
-                        <div className="add-task-btn-container">
-                            <button onClick={() => setIsModalVisible(true)}>
-                                Add/+
-                            </button>
+                        <div>
+                            <p>No Tasks today</p>
                         </div>
                     );
                 }
@@ -137,7 +116,8 @@ const DailySummary: React.FC<props> = ({
     return (
         <div
             className="daily-overview-container"
-            onClick={() => handleClick(date)}
+            onMouseEnter={toggleTaskHover}
+            onMouseLeave={() => setIsTaskHover(false)}
         >
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>
@@ -146,9 +126,25 @@ const DailySummary: React.FC<props> = ({
             </div>
             <div
                 className="daily-task-container container-child"
-                onMouseLeave={() => setIsTaskHover(false)}
+                onClick={() => handleClick(date)}
             >
                 {getDaysTasks()}
+            </div>
+            <div
+                className={
+                    isTaskHover
+                        ? "add-task-btn-container toggle-active"
+                        : "add-task-btn-container"
+                }
+            >
+                <button
+                    onClick={() => {
+                        setIsModalVisible(true);
+                        handleDateUpdate(date);
+                    }}
+                >
+                    Add/+
+                </button>
             </div>
         </div>
     );
