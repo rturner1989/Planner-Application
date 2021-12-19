@@ -130,22 +130,25 @@ const DailySummary: React.FC<props> = ({
             >
                 {getDaysTasks()}
             </div>
-            <div
-                className={
-                    isTaskHover
-                        ? "add-task-btn-container toggle-active"
-                        : "add-task-btn-container"
-                }
-            >
-                <button
-                    onClick={() => {
-                        setIsModalVisible(true);
-                        handleDateUpdate(date);
-                    }}
+            {(timeTense === timeState.FUTURE ||
+                timeTense === timeState.PRESENT) && (
+                <div
+                    className={
+                        isTaskHover
+                            ? "add-task-btn-container toggle-active"
+                            : "add-task-btn-container"
+                    }
                 >
-                    Add/+
-                </button>
-            </div>
+                    <button
+                        onClick={() => {
+                            setIsModalVisible(true);
+                            handleDateUpdate(date);
+                        }}
+                    >
+                        Add/+
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
