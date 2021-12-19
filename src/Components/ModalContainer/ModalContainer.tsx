@@ -9,7 +9,9 @@ interface props {
 const ModalContainer: React.FC<props> = ({ modal, children, handleClose }) => {
     return (
         <div className={modal}>
-            <button onClick={handleClose}>Close</button>
+            <button className="close-btn" onClick={handleClose}>
+                Close
+            </button>
             {children}
         </div>
     );

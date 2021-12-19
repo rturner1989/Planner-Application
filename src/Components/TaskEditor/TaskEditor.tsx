@@ -3,11 +3,12 @@ import { task } from "../../Library/Interfaces";
 import { makeColourCode, makeID } from "../../Library/Helpers";
 
 interface props {
+    date: string;
     formData: task | undefined;
     handleSubmit: (newTask: task) => void;
 }
 
-const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
+const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
     const [taskInput, setTaskInput] = useState(
         formData
             ? formData
@@ -17,22 +18,24 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                       name: "",
                       description: "",
                       endDate: new Date().toUTCString(),
-                      startTime: "12:00",
+                      startTime: new Date().toUTCString().slice(16, 22),
                       endTime: "12:00",
                       color: makeColourCode(),
                   };
               }
     );
 
+    console.log(taskInput.startTime);
+
     return (
-        <form>
-            <div>
-                <label htmlFor="">
+        <form className="add-task-form">
+            <div className="title-description-container">
+                <label className="title-input" htmlFor="">
                     Title:
                     <input
                         value={taskInput.name}
                         type="text"
-                        name="itle"
+                        name="title"
                         placeholder="Title"
                         onChange={(e) => {
                             setTaskInput({
@@ -42,7 +45,7 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                         }}
                     />
                 </label>
-                <label htmlFor="">
+                <label className="description-input" htmlFor="">
                     Description:
                     <textarea
                         value={taskInput.description}
@@ -57,13 +60,11 @@ const TaskEditor: React.FC<props> = ({ formData, handleSubmit }) => {
                     />
                 </label>
             </div>
-            <div>
+            <div className="type-input-container">
                 <label htmlFor="">
                     Date:
                     <input
-                        value={new Date(taskInput.endDate)
-                            .toISOString()
-                            .substr(0, 10)}
+                        value={new Date(date).toISOString().substr(0, 10)}
                         type="date"
                         name="endDate"
                         onChange={(e) => {

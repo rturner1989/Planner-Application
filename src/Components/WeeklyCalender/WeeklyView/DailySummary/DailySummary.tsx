@@ -9,6 +9,7 @@ import {
 } from "../../../../Library/Helpers";
 
 interface props {
+    setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
     handleClick: React.Dispatch<React.SetStateAction<string>>;
     day: days;
     date: string;
@@ -19,7 +20,13 @@ const todaysDate = new Date().toUTCString();
 const currentTime = todaysDate.slice(17, 22);
 // const midnight = new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
 
-const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
+const DailySummary: React.FC<props> = ({
+    setIsModalVisible,
+    handleClick,
+    day,
+    date,
+    tasks,
+}) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
     const [elapsedTasks, setElapsedTasks] = useState(tasks);
@@ -66,9 +73,15 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                         );
                     }
                     return (
-                        <div>
-                            {/* add the add task function here */}
-                            <button>Add/+</button>
+                        <div className="add-task-btn-container">
+                            <button
+                                onClick={() => {
+                                    setIsModalVisible(true);
+                                    handleClick(date);
+                                }}
+                            >
+                                Add/+
+                            </button>
                         </div>
                     );
                 }
@@ -94,9 +107,10 @@ const DailySummary: React.FC<props> = ({ handleClick, day, date, tasks }) => {
                         );
                     }
                     return (
-                        <div>
-                            {/* add the add task function here */}
-                            <button>Add/+</button>
+                        <div className="add-task-btn-container">
+                            <button onClick={() => setIsModalVisible(true)}>
+                                Add/+
+                            </button>
                         </div>
                     );
                 }

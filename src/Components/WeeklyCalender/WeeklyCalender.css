@@ -1,25 +1,17 @@
-/* Navbar */
-.navbar {
-    width: 100%;
-    grid-area: nav;
-    border: solid 1px black;
-}
-
 /* Weekly Overview */
 .weekly-overview-container {
     border: solid 1px blue;
-    width: 100%;
+    width: 30%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    grid-area: daysummary;
 }
 .btn-group {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 10%;
 }
 .add-btn {
     width: 30px;
@@ -32,10 +24,6 @@
     overflow-y: scroll;
     scrollbar-width: thin;
 }
-/* .days:hover {
-    overflow-y: auto;
-    scrollbar-width: thin;
-} */
 .daily-overview-container {
     border: solid 1px green;
     min-height: 250px;
@@ -72,6 +60,44 @@
 /* Daily Detail */
 .daily-detail-container {
     width: 100%;
-    grid-area: daydetail;
     border: solid 1px red;
+}
+.chosen-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+}
+.filtered-tasks {
+    width: 100%;
+    height: 100%;
+}
+
+/* Task Modal */
+.additional-task-modal {
+    position: absolute;
+    border: black solid 1px;
+    left: 25%;
+    top: 42%;
+}
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+}
+.title-description-container {
+    display: flex;
+    flex-direction: column;
+}
+.type-input-container {
+    display: flex;
+    flex-direction: column;
+}
+.title-input {
+    display: flex;
+    flex-direction: column;
+}
+.description-input {
+    display: flex;
+    flex-direction: column;
 }

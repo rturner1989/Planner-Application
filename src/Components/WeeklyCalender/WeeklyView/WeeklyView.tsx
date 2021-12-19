@@ -4,10 +4,10 @@ import { getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import { filterTasksByDate, makeID } from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";
-import ModalContainer from "../../ModalContainer/ModalContainer";
-import TaskEditor from "../../TaskEditor/TaskEditor";
 
 interface props {
+    isModalVisible: boolean;
+    setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
     taskFormData: task[];
     setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
     setSelectedDay: React.Dispatch<React.SetStateAction<string>>;
@@ -19,11 +19,12 @@ interface week {
 }
 
 const WeeklyView: React.FC<props> = ({
+    isModalVisible,
+    setIsModalVisible,
     setSelectedDay,
     taskFormData,
     setTaskFormData,
 }) => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [weekCount, setWeekCount] = useState(1);
 
     const arrOfWeeksFunction = (): week[][] => {
@@ -220,9 +221,6 @@ const WeeklyView: React.FC<props> = ({
             setWeekCount(weekCount + 1);
         }
     };
-    const addTask = (task: task) => {
-        setTaskFormData([...taskFormData, task]);
-    };
 
     const displayWeekString = () => {
         switch (weekCount) {
@@ -248,17 +246,6 @@ const WeeklyView: React.FC<props> = ({
                 {displayWeekString()}
                 <button onClick={nextWeek}>next</button>
             </div>
-            <button className="add-btn" onClick={() => setIsModalVisible(true)}>
-                Add
-            </button>
-            {isModalVisible && (
-                <ModalContainer
-                    modal={"additional-task-modal"}
-                    handleClose={() => setIsModalVisible(false)}
-                >
-                    <TaskEditor formData={undefined} handleSubmit={addTask} />
-                </ModalContainer>
-            )}
             <div className="days">
                 {arrOfWeeks[weekCount].map((week) => {
                     return (
@@ -268,6 +255,7 @@ const WeeklyView: React.FC<props> = ({
                             day={week.day}
                             date={week.date}
                             tasks={week.tasks}
+                            setIsModalVisible={setIsModalVisible}
                         />
                     );
                 })}
