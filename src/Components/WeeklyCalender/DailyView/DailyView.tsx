@@ -40,7 +40,7 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
         );
     }
     return (
-        <div>
+        <div className="daily-detail-container">
             <h1>No Tasks</h1>
         </div>
     );

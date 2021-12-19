@@ -1,11 +1,19 @@
+/* Navbar */
+.navbar {
+    width: 100%;
+    grid-area: nav;
+    border: solid 1px black;
+}
+
 /* Weekly Overview */
 .weekly-overview-container {
     border: solid 1px blue;
-    width: 20%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-area: daysummary;
 }
 .btn-group {
     display: flex;
@@ -21,8 +29,13 @@
     flex-direction: column-reverse;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
+/* .days:hover {
+    overflow-y: auto;
+    scrollbar-width: thin;
+} */
 .daily-overview-container {
     border: solid 1px green;
     min-height: 250px;
@@ -58,6 +71,7 @@
 
 /* Daily Detail */
 .daily-detail-container {
-    width: 80%;
+    width: 100%;
+    grid-area: daydetail;
     border: solid 1px red;
 }

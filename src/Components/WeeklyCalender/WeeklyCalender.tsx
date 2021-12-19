@@ -2,6 +2,7 @@ import { useState } from "react";
 import DailyView from "./DailyView/DailyView";
 import WeeklyView from "./WeeklyView/WeeklyView";
 import useLocalStorage from "../../Hooks/useLocalStorage";
+import Navbar from "./Navbar/Navbar";
 
 // Calender Container
 
@@ -13,6 +14,7 @@ const WeeklyCalender = () => {
 
     return (
         <div id="weekly-calender-container">
+            <Navbar />
             <WeeklyView
                 setSelectedDay={setSelectedDay}
                 taskFormData={taskFormData}

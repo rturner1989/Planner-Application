@@ -11,14 +11,22 @@
 .App {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
 }
 /* Content */
 #weekly-calender-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+        "nav nav"
+        "daysummary daydetail";
     width: 100%;
     height: 100%;
+    max-width: 1700px;
+    max-height: 800px;
     overflow: hidden;
 }
