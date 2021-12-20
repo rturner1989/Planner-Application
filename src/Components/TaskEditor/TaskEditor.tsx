@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { task } from "../../Library/Interfaces";
 import { makeColourCode, makeID } from "../../Library/Helpers";
 
@@ -17,7 +17,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                       id: makeID(),
                       name: "",
                       description: "",
-                      endDate: new Date().toUTCString(),
+                      endDate: "",
                       startTime: "12:00",
                       endTime: "12:00",
                       color: makeColourCode(),
@@ -25,7 +25,34 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
               }
     );
 
-    console.log(taskInput.startTime);
+    useEffect(() => {
+        setTaskInput({
+            ...taskInput,
+            endDate: new Date(date).toISOString().substr(0, 10),
+        });
+    }, [date]);
+
+    const increaseMinsBy15 = (time: string) => {
+        let newArr = [];
+        const [splitStringHours, splitStringMins] = time.split(":");
+        const interval = parseInt(splitStringMins) + 15;
+        const toString = interval.toString();
+        newArr.push(splitStringHours, toString);
+        return newArr.join(":");
+    };
+
+    const titleRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef();
+    const dateRef = useRef();
+    const startRef = useRef();
+    const endRef = useRef();
+
+    // const submitFormData = () => {
+    //     setTaskInput({
+    //         ...taskInput,
+    //         name: titleRef,
+    //     });
+    // };
 
     return (
         <form className="add-task-form">
@@ -33,6 +60,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 <label className="title-input" htmlFor="">
                     Title:
                     <input
+                        ref={titleRef}
                         value={taskInput.name}
                         type="text"
                         name="title"
@@ -64,13 +92,13 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 <label htmlFor="">
                     Date:
                     <input
-                        value={new Date(date).toISOString().substr(0, 10)}
+                        value={taskInput.endDate}
                         type="date"
                         name="endDate"
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
-                                endDate: new Date(e.target.value).toUTCString(),
+                                endDate: e.currentTarget.value,
                             });
                         }}
                     />
@@ -98,7 +126,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
-                                endTime: e.target.value,
+                                endTime: e.currentTarget.value,
                             });
                         }}
                     />
@@ -109,17 +137,6 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 onClick={(e) => {
                     e.preventDefault();
                     handleSubmit(taskInput);
-                    setTaskInput((): task => {
-                        return {
-                            id: makeID(),
-                            name: "",
-                            description: "",
-                            endDate: new Date().toUTCString(),
-                            startTime: "12:00",
-                            endTime: "12:00",
-                            color: makeColourCode(),
-                        };
-                    });
                 }}
             >
                 Save
