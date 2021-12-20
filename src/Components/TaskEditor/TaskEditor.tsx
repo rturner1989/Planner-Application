@@ -17,7 +17,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                       id: makeID(),
                       name: "",
                       description: "",
-                      endDate: "",
+                      endDate: new Date(date).toISOString().substr(0, 10),
                       startTime: "12:00",
                       endTime: "12:00",
                       color: makeColourCode(),
@@ -26,6 +26,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
     );
 
     const increaseMinsBy15 = (time: string, number: number) => {
+        // needs conditionals for when time hits 00
         let newArr = [];
         const [splitStringHours, splitStringMins] = time.split(":");
         const interval = parseInt(splitStringMins) + number;
@@ -33,33 +34,6 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
         newArr.push(splitStringHours, toString);
         return newArr.join(":");
     };
-
-    useEffect(() => {
-        setTaskInput({
-            ...taskInput,
-            endDate: new Date(date).toISOString().substr(0, 10),
-        });
-    }, [date]);
-
-    // useEffect(() => {
-    //     setTaskInput({
-    //         ...taskInput,
-    //         endTime: increaseMinsBy15(taskInput.startTime, 30),
-    //     });
-    // }, [taskInput.startTime]);
-
-    // const titleRef = useRef<HTMLInputElement>(null);
-    // const descriptionRef = useRef();
-    // const dateRef = useRef();
-    // const startRef = useRef();
-    // const endRef = useRef();
-
-    // const submitFormData = () => {
-    //     setTaskInput({
-    //         ...taskInput,
-    //         name: titleRef,
-    //     });
-    // };
 
     return (
         <form className="add-task-form">
@@ -119,6 +93,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                             setTaskInput({
                                 ...taskInput,
                                 startTime: e.target.value,
+                                // fix bug here
                                 endTime: increaseMinsBy15(
                                     taskInput.startTime,
                                     15
@@ -147,6 +122,15 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 onClick={(e) => {
                     e.preventDefault();
                     handleSubmit(taskInput);
+                    setTaskInput({
+                        id: makeID(),
+                        name: "",
+                        description: "",
+                        endDate: "",
+                        startTime: "12:00",
+                        endTime: "12:00",
+                        color: makeColourCode(),
+                    });
                 }}
             >
                 Save

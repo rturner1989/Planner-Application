@@ -40,6 +40,16 @@ const DailySummary: React.FC<props> = ({
         setIsTaskHover(!isTaskHover);
     };
 
+    const limitToThree = (task: task[]) => {
+        return task.slice(0, 3);
+    };
+
+    const sortedTasks = filteredTasks.sort((a, b) => {
+        if (a.startTime > b.startTime) return 1;
+        if (a.startTime < b.startTime) return -1;
+        return 0;
+    });
+
     useEffect(() => {
         let interval: number | undefined = undefined;
         if (timeTense === timeState.PRESENT) {
@@ -54,6 +64,19 @@ const DailySummary: React.FC<props> = ({
             if (interval) clearInterval(interval);
         };
     }, [tasks]);
+
+    const daysTask = (task: task) => {
+        return (
+            <div className="daily-task" key={task.id}>
+                <h3 className="daily-task-title">{task.name}</h3>
+                <div className="daily-task-date-range">
+                    <p>{task.startTime}</p>
+                    <p>-</p>
+                    <p>{task.endTime}</p>
+                </div>
+            </div>
+        );
+    };
 
     const getDaysTasks = () => {
         switch (timeTense) {
@@ -73,42 +96,19 @@ const DailySummary: React.FC<props> = ({
                         </div>
                     );
                 }
-                return filteredTasks.map((task) => {
-                    return (
-                        <div className="daily-task" key={task.id}>
-                            <h3 className="daily-task-title">{task.name}</h3>
-                            <div className="daily-task-date-range">
-                                <p>{task.startTime}</p>
-                                <p>-</p>
-                                <p>{task.endTime}</p>
-                            </div>
-                        </div>
-                    );
+                return limitToThree(sortedTasks).map((task) => {
+                    return daysTask(task);
                 });
             case timeState.FUTURE:
-                if (tasks.slice(0, 3).length === 0) {
+                if (filteredTasks.length === 0) {
                     return (
                         <div>
                             <p>No Tasks today</p>
                         </div>
                     );
                 }
-                const sortedTasks = filteredTasks.sort((a, b) => {
-                    if (a.startTime > b.startTime) return 1;
-                    if (a.startTime < b.startTime) return -1;
-                    return 0;
-                });
-                return sortedTasks.map((task) => {
-                    return (
-                        <div className="daily-task" key={task.id}>
-                            <h3 className="daily-task-title">{task.name}</h3>
-                            <div className="daily-task-date-range">
-                                <p>{task.startTime}</p>
-                                <p>-</p>
-                                <p>{task.endTime}</p>
-                            </div>
-                        </div>
-                    );
+                return limitToThree(sortedTasks).map((task) => {
+                    return daysTask(task);
                 });
         }
     };
