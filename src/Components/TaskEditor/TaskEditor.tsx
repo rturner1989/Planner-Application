@@ -25,6 +25,15 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
               }
     );
 
+    const increaseMinsBy15 = (time: string, number: number) => {
+        let newArr = [];
+        const [splitStringHours, splitStringMins] = time.split(":");
+        const interval = parseInt(splitStringMins) + number;
+        const toString = interval.toString();
+        newArr.push(splitStringHours, toString);
+        return newArr.join(":");
+    };
+
     useEffect(() => {
         setTaskInput({
             ...taskInput,
@@ -32,20 +41,18 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
         });
     }, [date]);
 
-    const increaseMinsBy15 = (time: string) => {
-        let newArr = [];
-        const [splitStringHours, splitStringMins] = time.split(":");
-        const interval = parseInt(splitStringMins) + 15;
-        const toString = interval.toString();
-        newArr.push(splitStringHours, toString);
-        return newArr.join(":");
-    };
+    // useEffect(() => {
+    //     setTaskInput({
+    //         ...taskInput,
+    //         endTime: increaseMinsBy15(taskInput.startTime, 30),
+    //     });
+    // }, [taskInput.startTime]);
 
-    const titleRef = useRef<HTMLInputElement>(null);
-    const descriptionRef = useRef();
-    const dateRef = useRef();
-    const startRef = useRef();
-    const endRef = useRef();
+    // const titleRef = useRef<HTMLInputElement>(null);
+    // const descriptionRef = useRef();
+    // const dateRef = useRef();
+    // const startRef = useRef();
+    // const endRef = useRef();
 
     // const submitFormData = () => {
     //     setTaskInput({
@@ -60,7 +67,6 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 <label className="title-input" htmlFor="">
                     Title:
                     <input
-                        ref={titleRef}
                         value={taskInput.name}
                         type="text"
                         name="title"
@@ -98,7 +104,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
-                                endDate: e.currentTarget.value,
+                                endDate: e.target.value,
                             });
                         }}
                     />
@@ -113,6 +119,10 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                             setTaskInput({
                                 ...taskInput,
                                 startTime: e.target.value,
+                                endTime: increaseMinsBy15(
+                                    taskInput.startTime,
+                                    15
+                                ),
                             });
                         }}
                     />
@@ -126,7 +136,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         onChange={(e) => {
                             setTaskInput({
                                 ...taskInput,
-                                endTime: e.currentTarget.value,
+                                endTime: e.target.value,
                             });
                         }}
                     />
