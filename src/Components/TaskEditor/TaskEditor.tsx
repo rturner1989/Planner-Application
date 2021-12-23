@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { task } from "../../Library/Interfaces";
 import { makeColourCode, makeID } from "../../Library/Helpers";
+import { increaseMinsBy15, nearestFive } from "../../Library/DateTime";
 
 interface props {
     date: string;
@@ -9,23 +10,6 @@ interface props {
 }
 
 const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
-    const nearestFive = (dateString: string) => {
-        const coeff = 1000 * 60 * 5;
-        const date = new Date(dateString);
-        const rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff);
-        return new Date(rounded).toUTCString().slice(17, 22);
-    };
-
-    const increaseMinsBy15 = (time: string, number: number) => {
-        // needs conditionals for when time hits 00
-        let newArr = [];
-        const [splitStringHours, splitStringMins] = time.split(":");
-        const interval = parseInt(splitStringMins) + number;
-        const toString = interval.toLocaleString();
-        newArr.push(splitStringHours, toString);
-        return newArr.join(":");
-    };
-
     const [taskInput, setTaskInput] = useState(
         formData
             ? formData
@@ -47,6 +31,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
             ...taskInput,
             endDate: new Date(date).toISOString().substr(0, 10),
             startTime: nearestFive(date),
+            endTime: increaseMinsBy15(date, 30),
         });
     }, [date]);
 
@@ -109,10 +94,10 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                                 ...taskInput,
                                 startTime: e.target.value,
                                 // fix bug here
-                                endTime: increaseMinsBy15(
-                                    taskInput.startTime,
-                                    15
-                                ),
+                                // endTime: increaseMinsBy15(
+                                //     taskInput.startTime,
+                                //     30
+                                // ),
                             });
                         }}
                     />
@@ -142,7 +127,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         name: "",
                         description: "",
                         endDate: taskInput.endDate,
-                        startTime: nearestFive(date),
+                        startTime: "12:00",
                         endTime: "12:00",
                         color: makeColourCode(),
                     });

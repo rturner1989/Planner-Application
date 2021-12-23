@@ -28,3 +28,18 @@ export const getDayOfCurrentWeek = (numberOfDays: number) => {
     ).toUTCString();
     return dayOfWeek;
 };
+
+export const nearestFive = (dateString: string) => {
+    const coeff = 1000 * 60 * 5;
+    const date = new Date(dateString);
+    const rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff);
+    return rounded.toUTCString().slice(17, 22);
+};
+
+export const increaseMinsBy15 = (dateString: string, number: number) => {
+    const coeff = 1000 * 60 * 5;
+    const date = new Date(dateString);
+    const rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff);
+    const futureDate = new Date(rounded.getTime() + number * 60000);
+    return futureDate.toUTCString().slice(17, 22);
+};
