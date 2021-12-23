@@ -15,7 +15,6 @@ const WeeklyCalender = () => {
     const [updateSelectedDate, setUpdateSelectedDate] = useState<string>(
         new Date().toUTCString()
     );
-    console.log(updateSelectedDate);
 
     const [taskFormData, setTaskFormData] = useLocalStorage("taskList", []);
     const [isModalVisible, setIsModalVisible] = useState(false);
