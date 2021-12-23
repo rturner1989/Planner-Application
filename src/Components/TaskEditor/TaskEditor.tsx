@@ -25,12 +25,19 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
               }
     );
 
+    useEffect(() => {
+        setTaskInput({
+            ...taskInput,
+            endDate: new Date(date).toISOString().substr(0, 10),
+        });
+    }, [date]);
+
     const increaseMinsBy15 = (time: string, number: number) => {
         // needs conditionals for when time hits 00
         let newArr = [];
         const [splitStringHours, splitStringMins] = time.split(":");
         const interval = parseInt(splitStringMins) + number;
-        const toString = interval.toString();
+        const toString = interval.toLocaleString();
         newArr.push(splitStringHours, toString);
         return newArr.join(":");
     };
@@ -126,7 +133,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         id: makeID(),
                         name: "",
                         description: "",
-                        endDate: "",
+                        endDate: taskInput.endDate,
                         startTime: "12:00",
                         endTime: "12:00",
                         color: makeColourCode(),

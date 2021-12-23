@@ -126,7 +126,10 @@ const DailySummary: React.FC<props> = ({
             </div>
             <div
                 className="daily-task-container container-child"
-                onClick={() => handleClick(date)}
+                onClick={() => {
+                    handleClick(date);
+                    handleDateUpdate(date);
+                }}
             >
                 {getDaysTasks()}
             </div>
