@@ -20,7 +20,7 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                       description: "",
                       endDate: new Date(date).toISOString().substr(0, 10),
                       startTime: nearestFive(date),
-                      endTime: "12:00",
+                      endTime: increaseMinsBy15(date, 30),
                       color: makeColourCode(),
                   };
               }
@@ -127,8 +127,8 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                         name: "",
                         description: "",
                         endDate: taskInput.endDate,
-                        startTime: "12:00",
-                        endTime: "12:00",
+                        startTime: nearestFive(new Date().toUTCString()),
+                        endTime: increaseMinsBy15(new Date().toUTCString(), 30),
                         color: makeColourCode(),
                     });
                 }}
