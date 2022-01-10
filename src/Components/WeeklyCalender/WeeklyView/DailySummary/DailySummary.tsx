@@ -143,7 +143,9 @@ const DailySummary: React.FC<props> = ({
                     }
                 >
                     <button
-                        onClick={() => {
+                        onClick={(e) => {
+                            console.log(e);
+
                             setIsModalVisible(true);
                             handleDateUpdate(date);
                         }}

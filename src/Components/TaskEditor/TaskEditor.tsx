@@ -26,15 +26,6 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
               }
     );
 
-    useEffect(() => {
-        setTaskInput({
-            ...taskInput,
-            endDate: new Date(date).toISOString().substr(0, 10),
-            startTime: nearestFive(date),
-            endTime: increaseMinsBy15(date, 30),
-        });
-    }, [date]);
-
     return (
         <form
             className="add-task-form"

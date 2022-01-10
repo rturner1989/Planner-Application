@@ -39,6 +39,7 @@ const WeeklyCalender = () => {
                     handleClose={() => setIsModalVisible(false)}
                 >
                     <TaskEditor
+                        key={new Date().toUTCString()}
                         formData={undefined}
                         handleSubmit={addTask}
                         date={updateSelectedDate}
