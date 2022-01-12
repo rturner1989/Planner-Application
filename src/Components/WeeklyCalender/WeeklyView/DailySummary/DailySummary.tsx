@@ -19,7 +19,6 @@ interface props {
 
 const todaysDate = new Date().toUTCString();
 const currentTime = todaysDate.slice(17, 22);
-// const midnight = new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
 
 const DailySummary: React.FC<props> = ({
     handleDateUpdate,
@@ -144,8 +143,6 @@ const DailySummary: React.FC<props> = ({
                 >
                     <button
                         onClick={(e) => {
-                            console.log(e);
-
                             setIsModalVisible(true);
                             handleDateUpdate(date);
                         }}

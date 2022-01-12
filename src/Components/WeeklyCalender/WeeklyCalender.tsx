@@ -26,12 +26,10 @@ const WeeklyCalender = () => {
     return (
         <div id="weekly-calender-container">
             <WeeklyView
-                isModalVisible={isModalVisible}
                 setIsModalVisible={setIsModalVisible}
                 setSelectedDay={setSelectedDay}
                 setUpdateSelectedDate={setUpdateSelectedDate}
                 taskFormData={taskFormData}
-                setTaskFormData={setTaskFormData}
             />
             {isModalVisible && (
                 <ModalContainer

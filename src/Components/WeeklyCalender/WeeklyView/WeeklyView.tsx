@@ -6,10 +6,8 @@ import { filterTasksByDate, makeID } from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";
 
 interface props {
-    isModalVisible: boolean;
     setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
     taskFormData: task[];
-    setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
     setSelectedDay: React.Dispatch<React.SetStateAction<string>>;
     setUpdateSelectedDate: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -21,11 +19,9 @@ interface week {
 
 const WeeklyView: React.FC<props> = ({
     setUpdateSelectedDate,
-    isModalVisible,
     setIsModalVisible,
     setSelectedDay,
     taskFormData,
-    setTaskFormData,
 }) => {
     const [weekCount, setWeekCount] = useState(1);
 

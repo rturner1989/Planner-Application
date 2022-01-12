@@ -25,7 +25,6 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
 
     const updateTask = (a: task) => {
         const index = tasks.findIndex((task) => task.id === a.id);
-
         setTaskFormData([
             ...tasks.slice(0, index),
             a,
@@ -36,9 +35,6 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
     const filteredTasks = () => {
         if (dailyViewFilteredTasts.length !== 0) {
             return sortedTasks.map((task) => {
-                const style = {
-                    color: task.color,
-                };
                 return (
                     <div key={makeID()}>
                         <div className="sorted-task">
