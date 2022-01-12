@@ -6,9 +6,10 @@ import TaskEditor from "../../TaskEditor/TaskEditor";
 interface props {
     date: string;
     tasks: task[];
+    setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
 }
 
-const DailyView: React.FC<props> = ({ date, tasks }) => {
+const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
     const [dailyViewFilteredTasts, setDailyViewFilteredTasts] = useState(tasks);
     const [editTask, setEditTask] = useState<string | undefined>(undefined);
 
@@ -22,8 +23,14 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
         setDailyViewFilteredTasts(filterTasksByDate(tasks, date));
     }, [date, tasks]);
 
-    const updateTask = () => {
-        console.log("hello");
+    const updateTask = (a: task) => {
+        const index = tasks.findIndex((task) => task.id === a.id);
+
+        setTaskFormData([
+            ...tasks.slice(0, index),
+            a,
+            ...tasks.slice(index + 1),
+        ]);
     };
 
     const filteredTasks = () => {
@@ -33,8 +40,8 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
                     color: task.color,
                 };
                 return (
-                    <div>
-                        <div key={makeID()} className="sorted-task">
+                    <div key={makeID()}>
+                        <div className="sorted-task">
                             <h1>{task.name}</h1>
                             <p>{task.description}</p>
                             <p>{task.startTime}</p>
@@ -50,7 +57,6 @@ const DailyView: React.FC<props> = ({ date, tasks }) => {
                                     handleSubmit={updateTask}
                                     date={task.endDate}
                                 />
-
                                 <button onClick={() => setEditTask(undefined)}>
                                     cancel
                                 </button>

@@ -46,7 +46,11 @@ const WeeklyCalender = () => {
                     />
                 </ModalContainer>
             )}
-            <DailyView date={selectedDay} tasks={taskFormData} />
+            <DailyView
+                date={selectedDay}
+                tasks={taskFormData}
+                setTaskFormData={setTaskFormData}
+            />
         </div>
     );
 };
