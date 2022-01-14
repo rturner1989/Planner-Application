@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { days, timeState } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
@@ -112,11 +112,26 @@ const DailySummary: React.FC<props> = ({
         }
     };
 
+    const titleRef = useRef<any>(null);
+
+    const focusScroll = () => {
+        const options: ScrollIntoViewOptions = {
+            block: "center",
+        };
+        titleRef.current.scrollIntoView(options);
+    };
+
+    useEffect(() => {
+        if (!titleRef.current) return;
+        focusScroll();
+    }, []);
+
     return (
         <div
             className="daily-overview-container"
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
+            ref={isDateSame(date, todaysDate) ? titleRef : null}
         >
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>
@@ -142,7 +157,7 @@ const DailySummary: React.FC<props> = ({
                     }
                 >
                     <button
-                        onClick={(e) => {
+                        onClick={() => {
                             setIsModalVisible(true);
                             handleDateUpdate(date);
                         }}
