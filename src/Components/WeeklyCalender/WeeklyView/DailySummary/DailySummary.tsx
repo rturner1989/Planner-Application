@@ -128,7 +128,11 @@ const DailySummary: React.FC<props> = ({
 
     return (
         <div
-            className="daily-overview-container"
+            className={
+                isDateSame(date, todaysDate)
+                    ? "daily-overview-container active"
+                    : "daily-overview-container"
+            }
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
             ref={isDateSame(date, todaysDate) ? titleRef : null}
