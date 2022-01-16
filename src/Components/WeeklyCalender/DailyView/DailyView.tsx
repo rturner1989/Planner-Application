@@ -36,7 +36,7 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
         if (dailyViewFilteredTasts.length !== 0) {
             return sortedTasks.map((task) => {
                 return (
-                    <div key={makeID()}>
+                    <div key={makeID()} className="task-container">
                         <div className="sorted-task">
                             <h1>{task.name}</h1>
                             <p>{task.description}</p>

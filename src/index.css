@@ -13,19 +13,24 @@
     overflow: hidden;
 }
 .App {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 10% 90%;
     width: 75%;
     height: 75%;
+    max-height: 625px;
+    max-width: 1135px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px -2px gray, 1px 0 5px -2px gray;
+    background-color: white;
 }
 .title-bar {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid 1px black;
+    box-shadow: 0 1px 5px -2px gray;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 /* Content */
 #weekly-calender-container {

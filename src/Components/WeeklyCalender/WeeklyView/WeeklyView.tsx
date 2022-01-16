@@ -4,6 +4,7 @@ import { getDayOfCurrentWeek, isDateSame } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
 import { filterTasksByDate, makeID } from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface props {
     setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -240,9 +241,13 @@ const WeeklyView: React.FC<props> = ({
     return (
         <div className="weekly-overview-container">
             <div className="btn-group">
-                <button onClick={previousWeek}>prev</button>
+                <button onClick={previousWeek}>
+                    <IoIosArrowBack />
+                </button>
                 {displayWeekString()}
-                <button onClick={nextWeek}>next</button>
+                <button onClick={nextWeek}>
+                    <IoIosArrowForward />
+                </button>
             </div>
             <div className="days">
                 {arrOfWeeks[weekCount].map((week) => {

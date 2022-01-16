@@ -7,6 +7,7 @@ import {
     isPastPresentFuture,
     filterElapsedTasks,
 } from "../../../../Library/Helpers";
+import { MdPlaylistAdd } from "react-icons/md";
 
 interface props {
     handleDateUpdate: React.Dispatch<React.SetStateAction<string>>;
@@ -67,7 +68,9 @@ const DailySummary: React.FC<props> = ({
     const daysTask = (task: task) => {
         return (
             <div className="daily-task" key={task.id}>
-                <h3 className="daily-task-title">{task.name}</h3>
+                <h3 className="daily-task-title">
+                    {task.name.charAt(0).toUpperCase() + task.name.slice(1)}
+                </h3>
                 <div className="daily-task-date-range">
                     <p>{task.startTime}</p>
                     <p>-</p>
@@ -140,7 +143,9 @@ const DailySummary: React.FC<props> = ({
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>
                 <h2 className="daily-date">{date.slice(4, 11)}</h2>
-                {isDateSame(date, todaysDate) && <h3>today</h3>}
+                {isDateSame(date, todaysDate) && (
+                    <h4 className="today-marker">Today</h4>
+                )}
             </div>
             <div
                 className="daily-task-container container-child"
@@ -166,7 +171,7 @@ const DailySummary: React.FC<props> = ({
                             handleDateUpdate(date);
                         }}
                     >
-                        Add/+
+                        <MdPlaylistAdd />
                     </button>
                 </div>
             )}
