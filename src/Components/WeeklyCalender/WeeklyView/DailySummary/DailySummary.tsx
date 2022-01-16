@@ -6,6 +6,7 @@ import {
     filterTasksByTime,
     isPastPresentFuture,
     filterElapsedTasks,
+    firstUpperCase,
 } from "../../../../Library/Helpers";
 import { MdPlaylistAdd } from "react-icons/md";
 
@@ -69,7 +70,7 @@ const DailySummary: React.FC<props> = ({
         return (
             <div className="daily-task" key={task.id}>
                 <h3 className="daily-task-title">
-                    {task.name.charAt(0).toUpperCase() + task.name.slice(1)}
+                    {firstUpperCase(task.name)}
                 </h3>
                 <div className="daily-task-date-range">
                     <p>{task.startTime}</p>
@@ -117,16 +118,16 @@ const DailySummary: React.FC<props> = ({
 
     const titleRef = useRef<any>(null);
 
-    const focusScroll = () => {
+    const focusScroll = (ref: any) => {
         const options: ScrollIntoViewOptions = {
             block: "center",
         };
-        titleRef.current.scrollIntoView(options);
+        ref.current.scrollIntoView(options);
     };
 
     useEffect(() => {
         if (!titleRef.current) return;
-        focusScroll();
+        focusScroll(titleRef);
     }, []);
 
     return (

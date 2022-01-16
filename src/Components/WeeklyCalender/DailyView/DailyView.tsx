@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { filterTasksByDate, makeID } from "../../../Library/Helpers";
+import {
+    filterTasksByDate,
+    firstUpperCase,
+    makeID,
+} from "../../../Library/Helpers";
 import { task } from "../../../Library/Interfaces";
 import TaskEditor from "../../TaskEditor/TaskEditor";
 
@@ -38,10 +42,10 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                 return (
                     <div key={makeID()} className="task-container">
                         <div className="sorted-task">
-                            <h1>{task.name}</h1>
+                            <h1>{firstUpperCase(task.name)}</h1>
                             <p>{task.description}</p>
-                            <p>{task.startTime}</p>
-                            <p>{task.endTime}</p>
+                            <p>Start: {task.startTime}</p>
+                            <p>End: {task.endTime}</p>
                             <button onClick={() => setEditTask(task.id)}>
                                 edit
                             </button>

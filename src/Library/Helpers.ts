@@ -65,3 +65,9 @@ export const makeColourCode = () => {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return randomColor;
 };
+
+export const firstUpperCase = (sentence: string) => {
+    return sentence.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+        letter.toUpperCase()
+    );
+};
