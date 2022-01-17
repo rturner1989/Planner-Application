@@ -1,8 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { days } from "../../../Library/Enums";
-import { getDayOfCurrentWeek, isDateSame } from "../../../Library/DateTime";
+import React, { useState, useEffect } from "react";
+import { days, timeState } from "../../../Library/Enums";
+import { getDayOfCurrentWeek } from "../../../Library/DateTime";
 import { task } from "../../../Library/Interfaces";
-import { filterTasksByDate, makeID } from "../../../Library/Helpers";
+import {
+    filterTasksByDate,
+    isPastPresentFuture,
+    makeID,
+} from "../../../Library/Helpers";
 import DailySummary from "./DailySummary/DailySummary";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -16,6 +20,7 @@ interface week {
     day: days;
     date: string;
     tasks: task[];
+    timestate: timeState;
 }
 
 const WeeklyView: React.FC<props> = ({
@@ -25,6 +30,8 @@ const WeeklyView: React.FC<props> = ({
     taskFormData,
 }) => {
     const [weekCount, setWeekCount] = useState(1);
+
+    const todaysDate = new Date().toUTCString();
 
     const arrOfWeeksFunction = (): week[][] => {
         return [
@@ -37,6 +44,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-7)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.MONDAY,
@@ -45,6 +53,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-6)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.TUESDAY,
@@ -53,6 +62,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-5)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.WEDNESDAY,
@@ -61,6 +71,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-4)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.THURSDAY,
@@ -69,6 +80,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-3)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.FRIDAY,
@@ -77,6 +89,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-2)
                     ),
+                    timestate: timeState.PAST,
                 },
                 {
                     day: days.SATURDAY,
@@ -85,6 +98,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(-1)
                     ),
+                    timestate: timeState.PAST,
                 },
             ],
             // current week
@@ -96,12 +110,20 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(0)
                     ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
+                        getDayOfCurrentWeek(0)
+                    ),
                 },
                 {
                     day: days.MONDAY,
                     date: getDayOfCurrentWeek(1),
                     tasks: filterTasksByDate(
                         taskFormData,
+                        getDayOfCurrentWeek(1)
+                    ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
                         getDayOfCurrentWeek(1)
                     ),
                 },
@@ -112,12 +134,20 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(2)
                     ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
+                        getDayOfCurrentWeek(2)
+                    ),
                 },
                 {
                     day: days.WEDNESDAY,
                     date: getDayOfCurrentWeek(3),
                     tasks: filterTasksByDate(
                         taskFormData,
+                        getDayOfCurrentWeek(3)
+                    ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
                         getDayOfCurrentWeek(3)
                     ),
                 },
@@ -128,6 +158,10 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(4)
                     ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
+                        getDayOfCurrentWeek(4)
+                    ),
                 },
                 {
                     day: days.FRIDAY,
@@ -136,12 +170,20 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(5)
                     ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
+                        getDayOfCurrentWeek(5)
+                    ),
                 },
                 {
                     day: days.SATURDAY,
                     date: getDayOfCurrentWeek(6),
                     tasks: filterTasksByDate(
                         taskFormData,
+                        getDayOfCurrentWeek(6)
+                    ),
+                    timestate: isPastPresentFuture(
+                        todaysDate,
                         getDayOfCurrentWeek(6)
                     ),
                 },
@@ -155,6 +197,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(7)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.MONDAY,
@@ -163,6 +206,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(8)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.TUESDAY,
@@ -171,6 +215,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(9)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.WEDNESDAY,
@@ -179,6 +224,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(10)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.THURSDAY,
@@ -187,6 +233,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(11)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.FRIDAY,
@@ -195,6 +242,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(12)
                     ),
+                    timestate: timeState.FUTURE,
                 },
                 {
                     day: days.SATURDAY,
@@ -203,6 +251,7 @@ const WeeklyView: React.FC<props> = ({
                         taskFormData,
                         getDayOfCurrentWeek(13)
                     ),
+                    timestate: timeState.FUTURE,
                 },
             ],
         ];
@@ -238,7 +287,9 @@ const WeeklyView: React.FC<props> = ({
         setArrOfWeeks(arrOfWeeksFunction());
     }, [taskFormData]);
 
-    const [activeDay, setActiveDay] = useState<days | undefined>(undefined);
+    const [activeDate, setActiveDate] = useState<string>(
+        new Date().toUTCString()
+    );
 
     return (
         <div className="weekly-overview-container">
@@ -252,18 +303,18 @@ const WeeklyView: React.FC<props> = ({
                 </button>
             </div>
             <div className="days">
-                {arrOfWeeks[weekCount].map((week, index) => {
+                {arrOfWeeks[weekCount].map((week) => {
                     return (
                         <DailySummary
-                            key={index}
                             handleClick={setSelectedDay}
                             handleDateUpdate={setUpdateSelectedDate}
                             day={week.day}
                             date={week.date}
                             tasks={week.tasks}
+                            timeTense={week.timestate}
                             setIsModalVisible={setIsModalVisible}
-                            isActive={activeDay}
-                            setActiveDay={setActiveDay}
+                            isActive={activeDate === week.date}
+                            setActive={setActiveDate}
                         />
                     );
                 })}

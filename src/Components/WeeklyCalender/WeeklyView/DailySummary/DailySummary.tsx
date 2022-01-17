@@ -4,7 +4,6 @@ import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
 import {
     filterTasksByTime,
-    isPastPresentFuture,
     filterElapsedTasks,
     firstUpperCase,
 } from "../../../../Library/Helpers";
@@ -17,8 +16,9 @@ interface props {
     day: days;
     date: string;
     tasks: task[];
-    isActive: days | undefined;
-    setActiveDay: React.Dispatch<React.SetStateAction<days | undefined>>;
+    isActive: boolean;
+    setActive: React.Dispatch<React.SetStateAction<string>>;
+    timeTense: timeState;
 }
 
 const todaysDate = new Date().toUTCString();
@@ -32,14 +32,12 @@ const DailySummary: React.FC<props> = ({
     date,
     tasks,
     isActive,
-    setActiveDay,
+    setActive,
+    timeTense,
 }) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
     const [elapsedTasks, setElapsedTasks] = useState(tasks);
-    const [timeTense, setTimeTense] = useState(() =>
-        isPastPresentFuture(todaysDate, date)
-    );
 
     const toggleTaskHover = () => {
         setIsTaskHover(!isTaskHover);
@@ -134,21 +132,17 @@ const DailySummary: React.FC<props> = ({
         focusScroll(titleRef);
     }, []);
 
-    useEffect(() => {
-        if (isDateSame(date, todaysDate)) setActiveDay(day);
-    }, []);
-
     return (
         <div
             className={
-                isActive === day
+                isActive
                     ? "daily-overview-container active"
                     : "daily-overview-container"
             }
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
             ref={isDateSame(date, todaysDate) ? titleRef : null}
-            onClick={() => setActiveDay(day)}
+            onClick={() => setActive(date)}
         >
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>
