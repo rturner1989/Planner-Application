@@ -17,6 +17,8 @@ interface props {
     day: days;
     date: string;
     tasks: task[];
+    isActive: days | undefined;
+    setActiveDay: React.Dispatch<React.SetStateAction<days | undefined>>;
 }
 
 const todaysDate = new Date().toUTCString();
@@ -29,6 +31,8 @@ const DailySummary: React.FC<props> = ({
     day,
     date,
     tasks,
+    isActive,
+    setActiveDay,
 }) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
@@ -130,16 +134,21 @@ const DailySummary: React.FC<props> = ({
         focusScroll(titleRef);
     }, []);
 
+    useEffect(() => {
+        if (isDateSame(date, todaysDate)) setActiveDay(day);
+    }, []);
+
     return (
         <div
             className={
-                isDateSame(date, todaysDate)
+                isActive === day
                     ? "daily-overview-container active"
                     : "daily-overview-container"
             }
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
             ref={isDateSame(date, todaysDate) ? titleRef : null}
+            onClick={() => setActiveDay(day)}
         >
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>

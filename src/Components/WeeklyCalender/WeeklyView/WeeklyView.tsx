@@ -238,6 +238,8 @@ const WeeklyView: React.FC<props> = ({
         setArrOfWeeks(arrOfWeeksFunction());
     }, [taskFormData]);
 
+    const [activeDay, setActiveDay] = useState<days | undefined>(undefined);
+
     return (
         <div className="weekly-overview-container">
             <div className="btn-group">
@@ -250,16 +252,18 @@ const WeeklyView: React.FC<props> = ({
                 </button>
             </div>
             <div className="days">
-                {arrOfWeeks[weekCount].map((week) => {
+                {arrOfWeeks[weekCount].map((week, index) => {
                     return (
                         <DailySummary
-                            key={makeID()}
+                            key={index}
                             handleClick={setSelectedDay}
                             handleDateUpdate={setUpdateSelectedDate}
                             day={week.day}
                             date={week.date}
                             tasks={week.tasks}
                             setIsModalVisible={setIsModalVisible}
+                            isActive={activeDay}
+                            setActiveDay={setActiveDay}
                         />
                     );
                 })}
