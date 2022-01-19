@@ -118,19 +118,19 @@ const DailySummary: React.FC<props> = ({
         }
     };
 
-    const titleRef = useRef<any>(null);
+    // const titleRef = useRef<any>(null);
 
-    const focusScroll = (ref: any) => {
-        const options: ScrollIntoViewOptions = {
-            block: "center",
-        };
-        ref.current.scrollIntoView(options);
-    };
+    // const focusScroll = (ref: any) => {
+    //     const options: ScrollIntoViewOptions = {
+    //         block: "center",
+    //     };
+    //     ref.current.scrollIntoView(options);
+    // };
 
-    useEffect(() => {
-        if (!titleRef.current) return;
-        focusScroll(titleRef);
-    }, []);
+    // useEffect(() => {
+    //     if (!titleRef.current) return;
+    //     focusScroll(titleRef);
+    // }, []);
 
     return (
         <div
@@ -141,7 +141,7 @@ const DailySummary: React.FC<props> = ({
             }
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
-            ref={isDateSame(date, todaysDate) ? titleRef : null}
+            // ref={isDateSame(date, todaysDate) ? titleRef : null}
             onClick={() => setActive(date)}
         >
             <div className="daily-day-date-container container-child">

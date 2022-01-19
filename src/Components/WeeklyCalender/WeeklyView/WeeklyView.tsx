@@ -30,8 +30,8 @@ const WeeklyView: React.FC<props> = ({
     taskFormData,
 }) => {
     const [weekCount, setWeekCount] = useState(1);
-
     const todaysDate = new Date().toUTCString();
+    const [activeDate, setActiveDate] = useState<string>(todaysDate);
 
     const arrOfWeeksFunction = (): week[][] => {
         return [
@@ -287,10 +287,6 @@ const WeeklyView: React.FC<props> = ({
         setArrOfWeeks(arrOfWeeksFunction());
     }, [taskFormData]);
 
-    const [activeDate, setActiveDate] = useState<string>(
-        new Date().toUTCString()
-    );
-
     return (
         <div className="weekly-overview-container">
             <div className="btn-group">
@@ -306,6 +302,7 @@ const WeeklyView: React.FC<props> = ({
                 {arrOfWeeks[weekCount].map((week) => {
                     return (
                         <DailySummary
+                            key={makeID()}
                             handleClick={setSelectedDay}
                             handleDateUpdate={setUpdateSelectedDate}
                             day={week.day}
