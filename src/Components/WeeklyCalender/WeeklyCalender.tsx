@@ -21,6 +21,7 @@ const WeeklyCalender = () => {
 
     const addTask = (task: task) => {
         setTaskFormData([...taskFormData, task]);
+        setIsModalVisible(false);
     };
 
     return (

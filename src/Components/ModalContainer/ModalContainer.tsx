@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 interface props {
     modal: string;
@@ -10,7 +11,7 @@ const ModalContainer: React.FC<props> = ({ modal, children, handleClose }) => {
     return (
         <div className={modal}>
             <button className="close-btn" onClick={handleClose}>
-                Close
+                <AiOutlineCloseCircle />
             </button>
             {children}
         </div>

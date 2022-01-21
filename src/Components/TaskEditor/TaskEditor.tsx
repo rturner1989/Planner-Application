@@ -44,94 +44,93 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 });
             }}
         >
-            <div className="title-description-container">
-                <label className="title-input" htmlFor="">
-                    Title:
-                    <input
-                        value={taskInput.name}
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        required
-                        onChange={(e) => {
-                            setTaskInput({
-                                ...taskInput,
-                                name: e.target.value,
-                            });
-                        }}
-                    />
-                </label>
-                <label className="description-input" htmlFor="">
-                    Description:
-                    <textarea
-                        value={taskInput.description}
-                        name="description"
-                        placeholder="Description"
-                        required
-                        onChange={(e) =>
-                            setTaskInput({
-                                ...taskInput,
-                                description: e.target.value,
-                            })
-                        }
-                    />
-                </label>
+            <div className="input-container">
+                <div className="title-description-container">
+                    <label className="title-input" htmlFor="">
+                        Title:
+                        <input
+                            value={taskInput.name}
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            required
+                            onChange={(e) => {
+                                setTaskInput({
+                                    ...taskInput,
+                                    name: e.target.value,
+                                });
+                            }}
+                        />
+                    </label>
+                    <label className="description-input" htmlFor="">
+                        Description:
+                        <textarea
+                            value={taskInput.description}
+                            name="description"
+                            placeholder="Description"
+                            required
+                            onChange={(e) =>
+                                setTaskInput({
+                                    ...taskInput,
+                                    description: e.target.value,
+                                })
+                            }
+                        />
+                    </label>
+                </div>
+                <div className="type-input-container">
+                    <label htmlFor="">
+                        Date:
+                        <input
+                            value={taskInput.endDate}
+                            type="date"
+                            name="endDate"
+                            required
+                            onChange={(e) => {
+                                setTaskInput({
+                                    ...taskInput,
+                                    endDate: e.target.value,
+                                });
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="">
+                        From:
+                        <input
+                            value={taskInput.startTime}
+                            type="time"
+                            name="startTime"
+                            required
+                            onChange={(e) => {
+                                setTaskInput({
+                                    ...taskInput,
+                                    startTime: e.target.value,
+                                });
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="">
+                        Until:
+                        <input
+                            value={taskInput.endTime}
+                            type="time"
+                            name="endTime"
+                            required
+                            onChange={(e) => {
+                                setTaskInput({
+                                    ...taskInput,
+                                    endTime: e.target.value,
+                                });
+                            }}
+                        />
+                    </label>
+                </div>
             </div>
-            <div className="type-input-container">
-                <label htmlFor="">
-                    Date:
-                    <input
-                        value={taskInput.endDate}
-                        type="date"
-                        name="endDate"
-                        required
-                        onChange={(e) => {
-                            setTaskInput({
-                                ...taskInput,
-                                endDate: e.target.value,
-                            });
-                        }}
-                    />
-                </label>
-                <label htmlFor="">
-                    Start Time:
-                    <input
-                        value={taskInput.startTime}
-                        type="time"
-                        name="startTime"
-                        required
-                        onChange={(e) => {
-                            setTaskInput({
-                                ...taskInput,
-                                startTime: e.target.value,
-                                // fix bug here
-                                // endTime: increaseMinsBy15(
-                                //     taskInput.startTime,
-                                //     30
-                                // ),
-                            });
-                        }}
-                    />
-                </label>
-                <label htmlFor="">
-                    End Time:
-                    <input
-                        value={taskInput.endTime}
-                        type="time"
-                        name="endTime"
-                        required
-                        onChange={(e) => {
-                            setTaskInput({
-                                ...taskInput,
-                                endTime: e.target.value,
-                            });
-                        }}
-                    />
-                </label>
+            <div className="submit-btn-container">
+                <button className="submit-btn" type="submit">
+                    Save Task
+                </button>
             </div>
-            <button className="submit-btn" type="submit">
-                Save
-            </button>
         </form>
     );
 };

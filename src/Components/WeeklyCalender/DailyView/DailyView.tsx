@@ -14,7 +14,8 @@ interface props {
 }
 
 const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
-    const [dailyViewFilteredTasts, setDailyViewFilteredTasts] = useState(tasks);
+    const [dailyViewFilteredTasts, setDailyViewFilteredTasts] =
+        useState<task[]>(tasks);
     const [editTask, setEditTask] = useState<string | undefined>(undefined);
 
     const sortedTasks = dailyViewFilteredTasts.sort((a, b) => {
@@ -34,6 +35,7 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
             a,
             ...tasks.slice(index + 1),
         ]);
+        setEditTask(undefined);
     };
 
     const filteredTasks = () => {
@@ -42,26 +44,33 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                 return (
                     <div key={makeID()} className="task-container">
                         <div className="sorted-task">
-                            <h1>{firstUpperCase(task.name)}</h1>
-                            <p>{task.description}</p>
-                            <p>Start: {task.startTime}</p>
-                            <p>End: {task.endTime}</p>
-                            <button onClick={() => setEditTask(task.id)}>
-                                edit
-                            </button>
+                            <div className="task-title-disc">
+                                <h2>{firstUpperCase(task.name)}</h2>
+                                <p>{task.description}</p>
+                            </div>
+                            <div className="task-time">
+                                <p>
+                                    {task.startTime} - {task.endTime}
+                                </p>
+                            </div>
+                            <div className="task-btn">
+                                <button onClick={() => setEditTask(task.id)}>
+                                    Edit Task
+                                </button>
+                                <button onClick={() => setEditTask(undefined)}>
+                                    Cancel
+                                </button>
+                            </div>
                         </div>
-                        {editTask === task.id && (
-                            <div>
+                        <div className="task-editor">
+                            {editTask === task.id && (
                                 <TaskEditor
                                     formData={task}
                                     handleSubmit={updateTask}
                                     date={task.endDate}
                                 />
-                                <button onClick={() => setEditTask(undefined)}>
-                                    cancel
-                                </button>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 );
             });
