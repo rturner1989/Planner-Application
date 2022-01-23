@@ -11,6 +11,27 @@
     justify-content: center;
     width: 100%;
 }
+.selected-week {
+    width: 8rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+#prev-week,
+#next-week {
+    border: unset;
+    background: unset;
+    cursor: pointer;
+    color: rgba(117, 135, 212);
+}
+.prev-svg,
+.next-svg {
+    display: flex;
+    font-size: 3em;
+}
+#prev-week:disabled,
+#next-week:disabled {
+    color: rgb(165, 165, 165);
+}
 .add-btn {
     width: 30px;
 }
@@ -41,6 +62,9 @@
 .daily-overview-container:hover {
     box-shadow: inset 0px 2px 5px -2px #888, inset 0px -2px 5px -2px #888;
 }
+.daily-overview-container:focus-visible {
+    border: blue solid 3px;
+}
 .container-child {
     display: flex;
     flex-direction: column;
@@ -57,13 +81,52 @@
     visibility: hidden;
     transition: width 0.1s ease-in-out;
 }
+.add-task-btn {
+    color: black;
+    font-size: 2rem;
+    border: unset;
+    background: unset;
+    cursor: pointer;
+}
+.add-task-svg {
+    display: flex;
+}
 .toggle-active {
     width: 15%;
     visibility: visible;
 }
 .daily-day-date-container {
     width: 30%;
+    padding: 1rem;
     min-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.daily-date-container {
+    display: flex;
+    align-items: center;
+}
+.daily-day {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+.daily-date {
+    font-size: 2rem;
+    font-weight: 800;
+    color: red;
+}
+.daily-month {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.today-marker {
+    color: white;
+    padding: 0.3rem;
+    margin-top: 1rem;
+    background-color: rgb(38, 107, 236);
+    border-radius: 5px;
+    font-size: 1.1em;
 }
 .daily-task-container {
     width: 70%;
@@ -73,19 +136,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
+    width: fit-content;
 }
 .daily-task-date-range {
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
-}
-.today-marker {
-    color: white;
-    padding: 0.3rem;
-    background-color: rgb(70, 134, 255);
-    border-radius: 5px;
 }
 
 /* Daily Detail */
@@ -226,7 +283,6 @@
 .submit-btn {
     border: unset;
     background: unset;
-    color: white;
     cursor: pointer;
     width: 10rem;
     padding: 1rem;

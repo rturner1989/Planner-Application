@@ -42,6 +42,7 @@ const WeeklyCalender = () => {
                         formData={undefined}
                         handleSubmit={addTask}
                         date={updateSelectedDate}
+                        btnColor={"white"}
                     />
                 </ModalContainer>
             )}

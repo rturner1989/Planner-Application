@@ -11,7 +11,7 @@ const ModalContainer: React.FC<props> = ({ modal, children, handleClose }) => {
     return (
         <div className={modal}>
             <button className="close-btn" onClick={handleClose}>
-                <AiOutlineCloseCircle />
+                <AiOutlineCloseCircle aria-hidden={true} focusable={false} />
             </button>
             {children}
         </div>

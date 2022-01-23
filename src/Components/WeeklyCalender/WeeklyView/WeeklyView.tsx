@@ -273,11 +273,11 @@ const WeeklyView: React.FC<props> = ({
     const displayWeekString = () => {
         switch (weekCount) {
             case 0:
-                return <p>Last Week</p>;
+                return <p className="selected-week">Last Week</p>;
             case 1:
-                return <p>This Week</p>;
+                return <p className="selected-week">This Week</p>;
             case 2:
-                return <p>Next Week</p>;
+                return <p className="selected-week">Next Week</p>;
             default:
                 break;
         }
@@ -288,15 +288,43 @@ const WeeklyView: React.FC<props> = ({
     }, [taskFormData]);
 
     return (
-        <div className="weekly-overview-container">
+        <div className="weekly-overview-container" tabIndex={-1}>
             <div className="btn-group">
-                <button onClick={previousWeek}>
-                    <IoIosArrowBack />
-                </button>
+                {weekCount < 1 ? (
+                    <button id="prev-week" onClick={previousWeek} disabled>
+                        <IoIosArrowBack
+                            className="prev-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
+                    </button>
+                ) : (
+                    <button id="prev-week" onClick={previousWeek}>
+                        <IoIosArrowBack
+                            className="prev-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
+                    </button>
+                )}
                 {displayWeekString()}
-                <button onClick={nextWeek}>
-                    <IoIosArrowForward />
-                </button>
+                {weekCount > 1 ? (
+                    <button id="next-week" onClick={nextWeek} disabled>
+                        <IoIosArrowForward
+                            className="next-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
+                    </button>
+                ) : (
+                    <button id="next-week" onClick={nextWeek}>
+                        <IoIosArrowForward
+                            className="next-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
+                    </button>
+                )}
             </div>
             <div className="days">
                 {arrOfWeeks[weekCount].map((week) => {

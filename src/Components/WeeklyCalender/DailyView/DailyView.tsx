@@ -68,6 +68,7 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                     formData={task}
                                     handleSubmit={updateTask}
                                     date={task.endDate}
+                                    btnColor={"black"}
                                 />
                             )}
                         </div>

@@ -106,11 +106,7 @@ const DailySummary: React.FC<props> = ({
                 });
             case timeState.FUTURE:
                 if (filteredTasks.length === 0) {
-                    return (
-                        <div>
-                            <p>No Tasks today</p>
-                        </div>
-                    );
+                    return <p>No Tasks today</p>;
                 }
                 return limitToThree(sortedTasks).map((task) => {
                     return daysTask(task);
@@ -142,22 +138,25 @@ const DailySummary: React.FC<props> = ({
             onMouseEnter={toggleTaskHover}
             onMouseLeave={() => setIsTaskHover(false)}
             // ref={isDateSame(date, todaysDate) ? titleRef : null}
-            onClick={() => setActive(date)}
+            onClick={(e) => {
+                e.preventDefault();
+                setActive(date);
+                handleClick(date);
+                handleDateUpdate(date);
+            }}
+            tabIndex={0}
         >
             <div className="daily-day-date-container container-child">
                 <h1 className="daily-day">{day}</h1>
-                <h2 className="daily-date">{date.slice(4, 11)}</h2>
+                <h2 className="daily-date-container">
+                    <span className="daily-date">{date.slice(4, 7)}</span>
+                    <span className="daily-month">{date.slice(8, 11)}</span>
+                </h2>
                 {isDateSame(date, todaysDate) && (
                     <h4 className="today-marker">Today</h4>
                 )}
             </div>
-            <div
-                className="daily-task-container container-child"
-                onClick={() => {
-                    handleClick(date);
-                    handleDateUpdate(date);
-                }}
-            >
+            <div className="daily-task-container container-child">
                 {getDaysTasks()}
             </div>
             {(timeTense === timeState.FUTURE ||
@@ -170,12 +169,18 @@ const DailySummary: React.FC<props> = ({
                     }
                 >
                     <button
-                        onClick={() => {
+                        className="add-task-btn"
+                        onClick={(e) => {
+                            e.preventDefault();
                             setIsModalVisible(true);
                             handleDateUpdate(date);
                         }}
                     >
-                        <MdPlaylistAdd />
+                        <MdPlaylistAdd
+                            className="add-task-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
                     </button>
                 </div>
             )}

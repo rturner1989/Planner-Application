@@ -7,9 +7,15 @@ interface props {
     date: string;
     formData: task | undefined;
     handleSubmit: (newTask: task) => void;
+    btnColor: string;
 }
 
-const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
+const TaskEditor: React.FC<props> = ({
+    date,
+    formData,
+    handleSubmit,
+    btnColor,
+}) => {
     const [taskInput, setTaskInput] = useState(
         formData
             ? formData
@@ -127,7 +133,11 @@ const TaskEditor: React.FC<props> = ({ date, formData, handleSubmit }) => {
                 </div>
             </div>
             <div className="submit-btn-container">
-                <button className="submit-btn" type="submit">
+                <button
+                    className="submit-btn"
+                    style={{ color: btnColor }}
+                    type="submit"
+                >
                     Save Task
                 </button>
             </div>
