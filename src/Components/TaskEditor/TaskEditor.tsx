@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { task } from "../../Library/Interfaces";
 import { makeColourCode, makeID } from "../../Library/Helpers";
 import { increaseMinsBy15, nearestFive } from "../../Library/DateTime";

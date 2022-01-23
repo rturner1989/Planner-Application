@@ -12,9 +12,15 @@
     width: 100%;
 }
 .selected-week {
-    width: 8rem;
+    width: 10rem;
     font-size: 1.2rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.selected-week-option {
+    font-weight: 800;
+    font-size: 1.4rem;
 }
 #prev-week,
 #next-week {
@@ -118,7 +124,7 @@
 }
 .daily-month {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
 }
 .today-marker {
     color: white;
@@ -130,7 +136,11 @@
 }
 .daily-task-container {
     width: 70%;
+    padding: 0.5rem;
     justify-content: space-evenly;
+}
+.tasks-length {
+    font-size: 1.5rem;
 }
 .daily-task {
     display: flex;

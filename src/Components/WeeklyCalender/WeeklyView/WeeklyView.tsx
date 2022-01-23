@@ -273,11 +273,24 @@ const WeeklyView: React.FC<props> = ({
     const displayWeekString = () => {
         switch (weekCount) {
             case 0:
-                return <p className="selected-week">Last Week</p>;
+                return (
+                    <p className="selected-week">
+                        <span className="selected-week-option">Last</span> Week
+                    </p>
+                );
             case 1:
-                return <p className="selected-week">This Week</p>;
+                return (
+                    <p className="selected-week">
+                        <span className="selected-week-option">Current</span>{" "}
+                        Week
+                    </p>
+                );
             case 2:
-                return <p className="selected-week">Next Week</p>;
+                return (
+                    <p className="selected-week">
+                        <span className="selected-week-option">Next</span> Week
+                    </p>
+                );
             default:
                 break;
         }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { days, timeState } from "../../../../Library/Enums";
 import { task } from "../../../../Library/Interfaces";
 import { isDateSame } from "../../../../Library/DateTime";
@@ -87,18 +87,20 @@ const DailySummary: React.FC<props> = ({
         switch (timeTense) {
             case timeState.PAST:
                 return (
-                    <div className="daily-task-placeholder">
-                        <p>Past</p>
-                        <p>Tasks - {tasks.length}</p>
-                    </div>
+                    <p className="daily-task-placeholder">
+                        Tasks -{" "}
+                        <span className="tasks-length">{tasks.length}</span>
+                    </p>
                 );
             case timeState.PRESENT:
                 if (filteredTasks.length === 0) {
                     return (
-                        <div>
-                            <p>Present</p>
-                            <p>ElapsedTasks - {elapsedTasks.length}</p>
-                        </div>
+                        <p className="daily-task-placeholder">
+                            ElapsedTasks -{" "}
+                            <span className="tasks-length">
+                                {elapsedTasks.length}
+                            </span>
+                        </p>
                     );
                 }
                 return limitToThree(sortedTasks).map((task) => {
@@ -106,7 +108,9 @@ const DailySummary: React.FC<props> = ({
                 });
             case timeState.FUTURE:
                 if (filteredTasks.length === 0) {
-                    return <p>No Tasks today</p>;
+                    return (
+                        <p className="daily-task-placeholder">No Tasks today</p>
+                    );
                 }
                 return limitToThree(sortedTasks).map((task) => {
                     return daysTask(task);
