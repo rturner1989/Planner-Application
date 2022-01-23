@@ -301,7 +301,7 @@ const WeeklyView: React.FC<props> = ({
     }, [taskFormData]);
 
     return (
-        <div className="weekly-overview-container" tabIndex={-1}>
+        <aside className="weekly-overview-container" tabIndex={-1}>
             <div className="btn-group">
                 {weekCount < 1 ? (
                     <button id="prev-week" onClick={previousWeek} disabled>
@@ -357,7 +357,7 @@ const WeeklyView: React.FC<props> = ({
                     );
                 })}
             </div>
-        </div>
+        </aside>
     );
 };
 

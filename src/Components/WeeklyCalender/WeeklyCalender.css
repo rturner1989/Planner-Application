@@ -61,6 +61,7 @@
     -webkit-box-shadow: 2px 0 5px -2px grey;
     box-shadow: 2px 0 5px -2px grey;
     direction: ltr;
+    cursor: pointer;
 }
 .daily-overview-container.active {
     background-color: rgba(228, 228, 238, 0.609);
@@ -168,8 +169,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10%;
+    padding: 1rem;
     width: 100%;
+    font-size: 1.6rem;
 }
 .filtered-tasks {
     display: flex;
@@ -183,9 +185,14 @@
     scrollbar-width: thin;
     border-bottom-right-radius: 10px;
 }
+.empty-tasks {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
 .task-container {
     width: 100%;
-    border: 3px dashed rgb(117, 135, 212);
+    border: 3px solid rgb(117, 135, 212);
     background-color: rgba(117, 135, 212, 0.2);
     border-radius: 10px;
 }

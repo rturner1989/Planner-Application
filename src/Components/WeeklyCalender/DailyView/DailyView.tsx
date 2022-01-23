@@ -76,12 +76,12 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                 );
             });
         }
-        return <h1>No Tasks</h1>;
+        return <h1 className="empty-tasks">No Tasks</h1>;
     };
 
     return (
         <div className="daily-detail-container">
-            <div className="chosen-date">{date}</div>
+            <h2 className="chosen-date">{date.slice(0, 16)}</h2>
             <div className="filtered-tasks">{filteredTasks()}</div>
         </div>
     );
