@@ -5,7 +5,7 @@ import { isDateSame } from "../../../../Library/DateTime";
 import {
     filterTasksByTime,
     filterElapsedTasks,
-    firstUpperCase,
+    firstLetterOfEveryWord,
 } from "../../../../Library/Helpers";
 import { MdPlaylistAdd } from "react-icons/md";
 
@@ -72,7 +72,7 @@ const DailySummary: React.FC<props> = ({
         return (
             <div className="daily-task" key={task.id}>
                 <h3 className="daily-task-title">
-                    {firstUpperCase(task.name)}
+                    {firstLetterOfEveryWord(task.name)}
                 </h3>
                 <div className="daily-task-date-range">
                     <p>{task.startTime}</p>

@@ -66,8 +66,12 @@ export const makeColourCode = () => {
     return randomColor;
 };
 
-export const firstUpperCase = (sentence: string) => {
+export const firstLetterOfEveryWord = (sentence: string) => {
     return sentence.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
         letter.toUpperCase()
     );
+};
+
+export const firstWordUpperCase = (word: string) => {
+    return word.replace(/(^\w{1})/g, (letter) => letter.toUpperCase());
 };

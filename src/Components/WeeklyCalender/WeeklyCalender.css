@@ -233,20 +233,19 @@
     justify-content: end;
     gap: 0.5rem;
 }
-.task-edit-btn {
+.task-edit-btn,
+.task-delete-btn {
     cursor: pointer;
     border: unset;
     background: rgb(188, 195, 231);
     padding: 0.6rem;
     border-radius: 10px;
     font-size: 1.8rem;
+    color: rgb(62, 56, 144);
 }
-.task-edit-svg {
-    display: flex;
-}
+.task-edit-svg,
 .task-cancel-svg {
     display: flex;
-    color: red;
 }
 /* Task Modal */
 .additional-task-modal {

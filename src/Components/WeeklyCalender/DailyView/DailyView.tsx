@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
     filterTasksByDate,
-    firstUpperCase,
+    firstLetterOfEveryWord,
+    firstWordUpperCase,
     makeID,
 } from "../../../Library/Helpers";
 import { task } from "../../../Library/Interfaces";
 import TaskEditor from "../../TaskEditor/TaskEditor";
 import { FiEdit } from "react-icons/fi";
-import { MdOutlineCancel } from "react-icons/md";
+import { AiOutlineShrink } from "react-icons/ai";
+import { MdDeleteOutline } from "react-icons/md";
 import CSS from "csstype";
 
 interface props {
@@ -41,6 +43,11 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
         setEditTask(undefined);
     };
 
+    const deleteTask = (a: task) => {
+        const index = tasks.findIndex((x) => x.id === a.id);
+        setTaskFormData([...tasks.slice(0, index), ...tasks.slice(index + 1)]);
+    };
+
     const modalStyle: CSS.Properties = {
         color: "black",
         borderTop: "1px solid rgb(195, 191, 255)",
@@ -53,8 +60,8 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                     <div key={makeID()} className="task-container">
                         <div className="sorted-task">
                             <div className="task-title-disc">
-                                <h2>{firstUpperCase(task.name)}</h2>
-                                <p>{task.description}</p>
+                                <h2>{firstLetterOfEveryWord(task.name)}</h2>
+                                <p>{firstWordUpperCase(task.description)}</p>
                             </div>
                             <div className="task-time">
                                 <p>
@@ -67,7 +74,7 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                         className="task-edit-btn"
                                         onClick={() => setEditTask(undefined)}
                                     >
-                                        <MdOutlineCancel
+                                        <AiOutlineShrink
                                             className="task-cancel-svg"
                                             aria-hidden={true}
                                             focusable={false}
@@ -85,6 +92,16 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                         />
                                     </button>
                                 )}
+                                <button
+                                    className="task-delete-btn"
+                                    onClick={() => deleteTask(task)}
+                                >
+                                    <MdDeleteOutline
+                                        className="task-edit-svg"
+                                        aria-hidden={true}
+                                        focusable={false}
+                                    />
+                                </button>
                             </div>
                         </div>
                         {editTask === task.id && (
