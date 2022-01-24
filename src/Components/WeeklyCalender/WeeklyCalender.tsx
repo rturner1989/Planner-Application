@@ -5,6 +5,7 @@ import WeeklyView from "./WeeklyView/WeeklyView";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import TaskEditor from "../TaskEditor/TaskEditor";
+import CSS from "csstype";
 
 // Calender Container
 
@@ -22,6 +23,11 @@ const WeeklyCalender = () => {
     const addTask = (task: task) => {
         setTaskFormData([...taskFormData, task]);
         setIsModalVisible(false);
+    };
+
+    const modalStyle: CSS.Properties = {
+        color: "white",
+        borderTop: "1px solid white",
     };
 
     return (
@@ -42,7 +48,7 @@ const WeeklyCalender = () => {
                         formData={undefined}
                         handleSubmit={addTask}
                         date={updateSelectedDate}
-                        btnColor={"white"}
+                        style={modalStyle}
                     />
                 </ModalContainer>
             )}

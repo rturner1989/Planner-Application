@@ -6,6 +6,9 @@ import {
 } from "../../../Library/Helpers";
 import { task } from "../../../Library/Interfaces";
 import TaskEditor from "../../TaskEditor/TaskEditor";
+import { FiEdit } from "react-icons/fi";
+import { MdOutlineCancel } from "react-icons/md";
+import CSS from "csstype";
 
 interface props {
     date: string;
@@ -38,6 +41,11 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
         setEditTask(undefined);
     };
 
+    const modalStyle: CSS.Properties = {
+        color: "black",
+        borderTop: "1px solid rgb(195, 191, 255)",
+    };
+
     const filteredTasks = () => {
         if (dailyViewFilteredTasts.length !== 0) {
             return sortedTasks.map((task) => {
@@ -54,24 +62,42 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                 </p>
                             </div>
                             <div className="task-btn">
-                                <button onClick={() => setEditTask(task.id)}>
-                                    Edit Task
-                                </button>
-                                <button onClick={() => setEditTask(undefined)}>
-                                    Cancel
-                                </button>
+                                {editTask === task.id ? (
+                                    <button
+                                        className="task-edit-btn"
+                                        onClick={() => setEditTask(undefined)}
+                                    >
+                                        <MdOutlineCancel
+                                            className="task-cancel-svg"
+                                            aria-hidden={true}
+                                            focusable={false}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="task-edit-btn"
+                                        onClick={() => setEditTask(task.id)}
+                                    >
+                                        <FiEdit
+                                            className="task-edit-svg"
+                                            aria-hidden={true}
+                                            focusable={false}
+                                        />
+                                    </button>
+                                )}
                             </div>
                         </div>
-                        <div className="task-editor">
-                            {editTask === task.id && (
+                        {editTask === task.id && (
+                            <div className="task-editor">
+                                <div className="break"></div>
                                 <TaskEditor
                                     formData={task}
                                     handleSubmit={updateTask}
                                     date={task.endDate}
-                                    btnColor={"black"}
+                                    style={modalStyle}
                                 />
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 );
             });

@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { task } from "../../Library/Interfaces";
 import { makeColourCode, makeID } from "../../Library/Helpers";
 import { increaseMinsBy15, nearestFive } from "../../Library/DateTime";
+import CSS from "csstype";
 
 interface props {
     date: string;
     formData: task | undefined;
     handleSubmit: (newTask: task) => void;
-    btnColor: string;
+    style: CSS.Properties;
 }
 
 const TaskEditor: React.FC<props> = ({
     date,
     formData,
     handleSubmit,
-    btnColor,
+    style,
 }) => {
     const [taskInput, setTaskInput] = useState(
         formData
@@ -132,10 +133,17 @@ const TaskEditor: React.FC<props> = ({
                     </label>
                 </div>
             </div>
-            <div className="submit-btn-container">
+            <div
+                className="submit-btn-container"
+                style={{
+                    borderTop: style.borderTop,
+                }}
+            >
                 <button
                     className="submit-btn"
-                    style={{ color: btnColor }}
+                    style={{
+                        color: style.color,
+                    }}
                     type="submit"
                 >
                     Save Task
