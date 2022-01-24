@@ -88,7 +88,7 @@ const DailySummary: React.FC<props> = ({
             case timeState.PAST:
                 return (
                     <p className="daily-task-placeholder">
-                        Tasks -{" "}
+                        Elapsed Tasks -{" "}
                         <span className="tasks-length">{tasks.length}</span>
                     </p>
                 );
@@ -96,7 +96,7 @@ const DailySummary: React.FC<props> = ({
                 if (filteredTasks.length === 0) {
                     return (
                         <p className="daily-task-placeholder">
-                            ElapsedTasks -{" "}
+                            Elapsed Tasks -{" "}
                             <span className="tasks-length">
                                 {elapsedTasks.length}
                             </span>
