@@ -74,6 +74,9 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                         className="task-edit-btn"
                                         onClick={() => setEditTask(undefined)}
                                     >
+                                        <span className="visually-hidden">
+                                            collapse edit box
+                                        </span>
                                         <AiOutlineShrink
                                             className="task-cancel-svg"
                                             aria-hidden={true}
@@ -85,6 +88,9 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                         className="task-edit-btn"
                                         onClick={() => setEditTask(task.id)}
                                     >
+                                        <span className="visually-hidden">
+                                            open edit box
+                                        </span>
                                         <FiEdit
                                             className="task-edit-svg"
                                             aria-hidden={true}
@@ -96,6 +102,9 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
                                     className="task-delete-btn"
                                     onClick={() => deleteTask(task)}
                                 >
+                                    <span className="visually-hidden">
+                                        delete task
+                                    </span>
                                     <MdDeleteOutline
                                         className="task-edit-svg"
                                         aria-hidden={true}

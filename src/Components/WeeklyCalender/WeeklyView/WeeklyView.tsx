@@ -305,6 +305,7 @@ const WeeklyView: React.FC<props> = ({
             <div className="btn-group">
                 {weekCount < 1 ? (
                     <button id="prev-week" onClick={previousWeek} disabled>
+                        <span className="visually-hidden">previous week</span>
                         <IoIosArrowBack
                             className="prev-svg"
                             aria-hidden={true}
@@ -313,6 +314,7 @@ const WeeklyView: React.FC<props> = ({
                     </button>
                 ) : (
                     <button id="prev-week" onClick={previousWeek}>
+                        <span className="visually-hidden">previous week</span>
                         <IoIosArrowBack
                             className="prev-svg"
                             aria-hidden={true}
@@ -323,6 +325,7 @@ const WeeklyView: React.FC<props> = ({
                 {displayWeekString()}
                 {weekCount > 1 ? (
                     <button id="next-week" onClick={nextWeek} disabled>
+                        <span className="visually-hidden">next week</span>
                         <IoIosArrowForward
                             className="next-svg"
                             aria-hidden={true}
@@ -331,6 +334,7 @@ const WeeklyView: React.FC<props> = ({
                     </button>
                 ) : (
                     <button id="next-week" onClick={nextWeek}>
+                        <span className="visually-hidden">next week</span>
                         <IoIosArrowForward
                             className="next-svg"
                             aria-hidden={true}
