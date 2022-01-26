@@ -4,6 +4,7 @@
     height: 100%;
     display: grid;
     grid-template-rows: 10% 90%;
+    border-bottom-left-radius: 10px;
 }
 .btn-group {
     display: flex;
@@ -85,11 +86,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(213, 214, 231);
+    background-color: rgba(117, 135, 212, 0.4);
     visibility: hidden;
     transition: width 0.1s ease-in-out;
 }
 .add-task-btn {
+    height: 100%;
     color: black;
     font-size: 2rem;
     border: unset;
@@ -194,12 +196,13 @@
 }
 .task-container {
     width: 100%;
-    border: 3px solid rgb(117, 135, 212);
+    height: fit-content;
+    border: 2px solid rgba(62, 56, 144, 0.5);
     background-color: rgba(117, 135, 212, 0.2);
+    box-shadow: 0px 5px 10px rgb(218, 218, 218);
     border-radius: 10px;
-    /* display: flex;
-    flex-direction: column; */
     position: relative;
+    transition: all 0.3s ease;
 }
 .break {
     position: absolute;

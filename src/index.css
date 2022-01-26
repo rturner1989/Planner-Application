@@ -12,8 +12,16 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: rgb(62, 56, 144);
+    background: radial-gradient(
+        circle,
+        rgba(62, 56, 144, 0.5) 0%,
+        rgba(62, 56, 144, 0.9) 95%
+    );
+    position: relative;
 }
 .App {
+    z-index: 100;
     display: grid;
     grid-template-rows: 10% 90%;
     width: 75%;
@@ -22,8 +30,11 @@
     max-height: 950px;
     max-width: 1550px;
     border-radius: 10px;
-    box-shadow: 0 1px 5px -2px gray, 1px 0 5px -2px gray;
+    box-shadow: 0 1px 10px -2px black, 1px 0 10px -2px black;
     background-color: white;
+}
+.background-img {
+    position: absolute;
 }
 .title-bar {
     z-index: 200;
@@ -37,8 +48,8 @@
     background: rgb(228, 228, 238);
     background: linear-gradient(
         90deg,
-        rgba(217, 217, 246, 0.6) 0%,
-        rgba(200, 200, 235, 0.7) 95%
+        rgba(217, 217, 246, 0.9) 0%,
+        rgba(117, 135, 212, 0.8) 100%
     );
 }
 /* Content */
@@ -48,4 +59,6 @@
     width: 100%;
     height: 100%;
     position: relative;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

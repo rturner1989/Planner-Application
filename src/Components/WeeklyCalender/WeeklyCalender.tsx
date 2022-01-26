@@ -31,7 +31,7 @@ const WeeklyCalender = () => {
     };
 
     return (
-        <body id="weekly-calender-container">
+        <div id="weekly-calender-container">
             <WeeklyView
                 setIsModalVisible={setIsModalVisible}
                 setSelectedDay={setSelectedDay}
@@ -57,7 +57,7 @@ const WeeklyCalender = () => {
                 tasks={taskFormData}
                 setTaskFormData={setTaskFormData}
             />
-        </body>
+        </div>
     );
 };
 
