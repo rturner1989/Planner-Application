@@ -220,6 +220,7 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 .task-time {
+    font-size: 1.2rem;
     width: 100%;
     justify-self: center;
     align-self: center;
@@ -256,7 +257,7 @@
     position: absolute;
     border: black solid 1px;
     background-color: white;
-    height: 400px;
+    height: 410px;
     width: 500px;
     left: 30%;
     top: 20%;
@@ -278,7 +279,7 @@
     padding: 0.2rem;
 }
 .input-container {
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -291,19 +292,50 @@
 .type-input-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
+    align-items: center;
 }
 .type-input-container label {
     display: flex;
     gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.time-input {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.date-input,
+.time-input-from,
+.time-input-to {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: rgb(62, 56, 144) solid 1px;
+}
+.title-input-label,
+.description-input-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.5rem;
 }
 .title-input {
-    display: flex;
-    flex-direction: column;
+    border: rgb(62, 56, 144) solid 1px;
+    border-radius: 5px;
+    height: 2.5rem;
+    font-size: 1rem;
+    padding: 0.3rem;
 }
 .description-input {
-    display: flex;
-    flex-direction: column;
+    border: rgb(62, 56, 144) solid 1px;
+    border-radius: 5px;
+    height: 5rem;
+    resize: vertical;
+    font-size: 1rem;
+    padding: 0.3rem;
 }
 .close-btn {
     position: absolute;
@@ -329,4 +361,6 @@
     cursor: pointer;
     width: 10rem;
     padding: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
 }

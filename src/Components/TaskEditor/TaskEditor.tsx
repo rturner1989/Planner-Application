@@ -53,9 +53,10 @@ const TaskEditor: React.FC<props> = ({
         >
             <div className="input-container">
                 <div className="title-description-container">
-                    <label className="title-input" htmlFor="">
+                    <label className="title-input-label" htmlFor="">
                         Title:
                         <input
+                            className="title-input"
                             value={taskInput.name}
                             type="text"
                             name="title"
@@ -69,9 +70,10 @@ const TaskEditor: React.FC<props> = ({
                             }}
                         />
                     </label>
-                    <label className="description-input" htmlFor="">
+                    <label className="description-input-label" htmlFor="">
                         Description:
                         <textarea
+                            className="description-input"
                             value={taskInput.description}
                             name="description"
                             placeholder="Description"
@@ -89,6 +91,7 @@ const TaskEditor: React.FC<props> = ({
                     <label htmlFor="">
                         Date:
                         <input
+                            className="date-input"
                             value={taskInput.endDate}
                             type="date"
                             name="endDate"
@@ -101,36 +104,40 @@ const TaskEditor: React.FC<props> = ({
                             }}
                         />
                     </label>
-                    <label htmlFor="">
-                        From:
-                        <input
-                            value={taskInput.startTime}
-                            type="time"
-                            name="startTime"
-                            required
-                            onChange={(e) => {
-                                setTaskInput({
-                                    ...taskInput,
-                                    startTime: e.target.value,
-                                });
-                            }}
-                        />
-                    </label>
-                    <label htmlFor="">
-                        Until:
-                        <input
-                            value={taskInput.endTime}
-                            type="time"
-                            name="endTime"
-                            required
-                            onChange={(e) => {
-                                setTaskInput({
-                                    ...taskInput,
-                                    endTime: e.target.value,
-                                });
-                            }}
-                        />
-                    </label>
+                    <div className="time-input">
+                        <label htmlFor="">
+                            From:
+                            <input
+                                className="time-input-from"
+                                value={taskInput.startTime}
+                                type="time"
+                                name="startTime"
+                                required
+                                onChange={(e) => {
+                                    setTaskInput({
+                                        ...taskInput,
+                                        startTime: e.target.value,
+                                    });
+                                }}
+                            />
+                        </label>
+                        <label htmlFor="">
+                            Until:
+                            <input
+                                className="time-input-to"
+                                value={taskInput.endTime}
+                                type="time"
+                                name="endTime"
+                                required
+                                onChange={(e) => {
+                                    setTaskInput({
+                                        ...taskInput,
+                                        endTime: e.target.value,
+                                    });
+                                }}
+                            />
+                        </label>
+                    </div>
                 </div>
             </div>
             <div
