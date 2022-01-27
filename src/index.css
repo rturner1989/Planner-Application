@@ -25,6 +25,7 @@
     display: grid;
     grid-template-rows: 10% 90%;
     width: 75%;
+    min-height: 690px;
     min-width: 1000px;
     height: 75%;
     max-height: 950px;
@@ -71,3 +72,11 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+@media screen and (max-width: 1920px) and (orientation: landscape) {
+    .App {
+        max-width: 1050px;
+    }
+}
+/* @media screen and (max-width: 1050px) and (orientation: landscape) {
+    
+} */

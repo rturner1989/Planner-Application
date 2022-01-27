@@ -53,9 +53,10 @@ const TaskEditor: React.FC<props> = ({
         >
             <div className="input-container">
                 <div className="title-description-container">
-                    <label className="title-input-label" htmlFor="">
+                    <label className="title-input-label" htmlFor="title-input">
                         Title:
                         <input
+                            id="title-input"
                             className="title-input"
                             value={taskInput.name}
                             type="text"
@@ -70,9 +71,13 @@ const TaskEditor: React.FC<props> = ({
                             }}
                         />
                     </label>
-                    <label className="description-input-label" htmlFor="">
+                    <label
+                        className="description-input-label"
+                        htmlFor="description-input"
+                    >
                         Description:
                         <textarea
+                            id="description-input"
                             className="description-input"
                             value={taskInput.description}
                             name="description"
@@ -88,9 +93,10 @@ const TaskEditor: React.FC<props> = ({
                     </label>
                 </div>
                 <div className="type-input-container">
-                    <label htmlFor="">
+                    <label htmlFor="date-input">
                         Date:
                         <input
+                            id="date-input"
                             className="date-input"
                             value={taskInput.endDate}
                             type="date"
@@ -105,9 +111,10 @@ const TaskEditor: React.FC<props> = ({
                         />
                     </label>
                     <div className="time-input">
-                        <label htmlFor="">
+                        <label htmlFor="time-input-from">
                             From:
                             <input
+                                id="time-input-from"
                                 className="time-input-from"
                                 value={taskInput.startTime}
                                 type="time"
@@ -121,9 +128,10 @@ const TaskEditor: React.FC<props> = ({
                                 }}
                             />
                         </label>
-                        <label htmlFor="">
+                        <label htmlFor="time-input-to">
                             Until:
                             <input
+                                id="time-input-to"
                                 className="time-input-to"
                                 value={taskInput.endTime}
                                 type="time"
