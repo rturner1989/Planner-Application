@@ -75,10 +75,8 @@
 
 /* Mobile */
 @media screen and (max-width: 430px) and (orientation: portrait) {
-    #root {
-        overflow: unset;
-    }
     .App {
+        position: relative;
         min-height: unset;
         min-width: unset;
         max-height: unset;
