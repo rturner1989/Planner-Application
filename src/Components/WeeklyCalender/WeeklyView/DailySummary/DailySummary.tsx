@@ -7,7 +7,8 @@ import {
     filterElapsedTasks,
     firstLetterOfEveryWord,
 } from "../../../../Library/Helpers";
-import { MdPlaylistAdd } from "react-icons/md";
+import { MdPlaylistAdd, MdAddTask } from "react-icons/md";
+import useWindowDimensions from "../../../../Hooks/useWindowDimensions";
 
 interface props {
     handleDateUpdate: React.Dispatch<React.SetStateAction<string>>;
@@ -40,6 +41,8 @@ const DailySummary: React.FC<props> = ({
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
     const [elapsedTasks, setElapsedTasks] = useState(tasks);
+
+    const [windowDimensions] = useWindowDimensions();
 
     const toggleTaskHover = () => {
         setIsTaskHover(!isTaskHover);
@@ -134,6 +137,69 @@ const DailySummary: React.FC<props> = ({
     //     focusScroll(titleRef);
     // }, []);
 
+    if (windowDimensions.width <= 430) {
+        return (
+            <div
+                className={
+                    isActive
+                        ? "daily-overview-container active"
+                        : "daily-overview-container"
+                }
+                tabIndex={0}
+            >
+                <div
+                    className="daily-overview-day"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setActive(date);
+                        handleClick(date);
+                        handleDateUpdate(date);
+                        setToggleMobile(true);
+                    }}
+                >
+                    <div className="daily-day-date-container container-child">
+                        <h1 className="daily-day">{day}</h1>
+                        <h2 className="daily-date-container">
+                            <span className="daily-date">
+                                {date.slice(4, 7)}
+                            </span>
+                            <span className="daily-month">
+                                {date.slice(8, 11)}
+                            </span>
+                        </h2>
+                        {isDateSame(date, todaysDate) && (
+                            <h4 className="today-marker">Today</h4>
+                        )}
+                    </div>
+                    <div className="daily-task-container container-child">
+                        {getDaysTasks()}
+                    </div>
+                </div>
+                {(timeTense === timeState.FUTURE ||
+                    (timeTense === timeState.PRESENT &&
+                        windowDimensions.width <= 430)) && (
+                    <div className="mobile-add-task-btn-container">
+                        <button
+                            className="mobile-add-task-btn"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsModalVisible(true);
+                                handleDateUpdate(date);
+                            }}
+                        >
+                            <span className="visually-hidden">add task</span>
+                            <MdAddTask
+                                className="add-task-svg"
+                                aria-hidden={true}
+                                focusable={false}
+                            />
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+    }
+
     return (
         <div
             className={
@@ -183,6 +249,7 @@ const DailySummary: React.FC<props> = ({
                             handleDateUpdate(date);
                         }}
                     >
+                        <span className="visually-hidden">add task</span>
                         <MdPlaylistAdd
                             className="add-task-svg"
                             aria-hidden={true}

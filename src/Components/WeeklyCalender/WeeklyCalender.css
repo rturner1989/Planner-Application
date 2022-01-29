@@ -407,4 +407,34 @@
     .return-btn-svg {
         display: flex;
     }
+    .daily-overview-day {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    .mobile-add-task-btn-container {
+        display: flex;
+        align-items: flex-start;
+        padding: 0.5rem;
+    }
+    .mobile-add-task-btn {
+        z-index: 300;
+        border: unset;
+        background-color: rgb(188, 195, 231);
+        padding: 0.6rem;
+        border-radius: 10px;
+        font-size: 1.8rem;
+        color: rgb(62, 56, 144);
+        cursor: pointer;
+    }
+    .additional-task-modal {
+        left: 0;
+        top: 10%;
+        right: 0;
+        bottom: unset;
+        width: 95%;
+        height: unset;
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
