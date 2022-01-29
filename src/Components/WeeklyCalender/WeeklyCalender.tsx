@@ -19,6 +19,7 @@ const WeeklyCalender = () => {
 
     const [taskFormData, setTaskFormData] = useLocalStorage("taskList", []);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [toggleMobile, setToggleMobile] = useState<boolean>(false);
 
     const addTask = (task: task) => {
         setTaskFormData([...taskFormData, task]);
@@ -37,6 +38,8 @@ const WeeklyCalender = () => {
                 setSelectedDay={setSelectedDay}
                 setUpdateSelectedDate={setUpdateSelectedDate}
                 taskFormData={taskFormData}
+                toggleMobile={toggleMobile}
+                setToggleMobile={setToggleMobile}
             />
             {isModalVisible && (
                 <ModalContainer
@@ -56,6 +59,7 @@ const WeeklyCalender = () => {
                 date={selectedDay}
                 tasks={taskFormData}
                 setTaskFormData={setTaskFormData}
+                setToggleMobile={setToggleMobile}
             />
         </div>
     );

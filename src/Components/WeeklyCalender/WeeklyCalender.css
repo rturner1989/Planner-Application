@@ -369,3 +369,42 @@
     font-size: 1.4rem;
     font-weight: 500;
 }
+
+/* Mobile */
+@media screen and (max-width: 430px) and (orientation: portrait) {
+    .weekly-overview-container {
+        width: 100%;
+        z-index: 200;
+        position: absolute;
+        background-color: white;
+        transition: ease 0.5s;
+        transform: translateX(0);
+    }
+    .daily-detail-container {
+        width: 100%;
+    }
+    .mobile {
+        transform: translateX(-1000px);
+    }
+    .chosen-date-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+    }
+    .return-btn {
+        position: absolute;
+        left: 1rem;
+        cursor: pointer;
+        background: rgb(188, 195, 231);
+        padding: 0.6rem;
+        border-radius: 10px;
+        border: unset;
+        font-size: 1.8rem;
+        color: rgb(62, 56, 144);
+    }
+    .return-btn-svg {
+        display: flex;
+    }
+}

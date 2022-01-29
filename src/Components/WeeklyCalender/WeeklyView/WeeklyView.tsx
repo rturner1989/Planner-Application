@@ -15,6 +15,8 @@ interface props {
     taskFormData: task[];
     setSelectedDay: React.Dispatch<React.SetStateAction<string>>;
     setUpdateSelectedDate: React.Dispatch<React.SetStateAction<string>>;
+    toggleMobile: boolean;
+    setToggleMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface week {
     day: days;
@@ -28,6 +30,8 @@ const WeeklyView: React.FC<props> = ({
     setIsModalVisible,
     setSelectedDay,
     taskFormData,
+    toggleMobile,
+    setToggleMobile,
 }) => {
     const [weekCount, setWeekCount] = useState(1);
     const todaysDate = new Date().toUTCString();
@@ -301,7 +305,14 @@ const WeeklyView: React.FC<props> = ({
     }, [taskFormData]);
 
     return (
-        <aside className="weekly-overview-container" tabIndex={-1}>
+        <div
+            className={
+                toggleMobile
+                    ? "weekly-overview-container mobile"
+                    : "weekly-overview-container"
+            }
+            tabIndex={-1}
+        >
             <div className="btn-group">
                 {weekCount < 1 ? (
                     <button id="prev-week" onClick={previousWeek} disabled>
@@ -357,11 +368,12 @@ const WeeklyView: React.FC<props> = ({
                             setIsModalVisible={setIsModalVisible}
                             isActive={activeDate === week.date}
                             setActive={setActiveDate}
+                            setToggleMobile={setToggleMobile}
                         />
                     );
                 })}
             </div>
-        </aside>
+        </div>
     );
 };
 

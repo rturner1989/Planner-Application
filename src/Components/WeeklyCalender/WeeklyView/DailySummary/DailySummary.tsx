@@ -19,6 +19,7 @@ interface props {
     isActive: boolean;
     setActive: React.Dispatch<React.SetStateAction<string>>;
     timeTense: timeState;
+    setToggleMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const todaysDate = new Date().toUTCString();
@@ -34,6 +35,7 @@ const DailySummary: React.FC<props> = ({
     isActive,
     setActive,
     timeTense,
+    setToggleMobile,
 }) => {
     const [isTaskHover, setIsTaskHover] = useState(false);
     const [filteredTasks, setFilteredTasks] = useState(tasks);
@@ -147,6 +149,7 @@ const DailySummary: React.FC<props> = ({
                 setActive(date);
                 handleClick(date);
                 handleDateUpdate(date);
+                setToggleMobile(true);
             }}
             tabIndex={0}
         >

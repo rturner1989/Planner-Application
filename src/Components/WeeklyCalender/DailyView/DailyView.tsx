@@ -10,18 +10,28 @@ import TaskEditor from "../../TaskEditor/TaskEditor";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineShrink } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
+import { GrReturn } from "react-icons/gr";
 import CSS from "csstype";
+import useWindowDimensions from "../../../Hooks/useWindowDimensions";
 
 interface props {
     date: string;
     tasks: task[];
     setTaskFormData: React.Dispatch<React.SetStateAction<task[]>>;
+    setToggleMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
+const DailyView: React.FC<props> = ({
+    date,
+    tasks,
+    setTaskFormData,
+    setToggleMobile,
+}) => {
     const [dailyViewFilteredTasts, setDailyViewFilteredTasts] =
         useState<task[]>(tasks);
     const [editTask, setEditTask] = useState<string | undefined>(undefined);
+
+    const [windowDimensions] = useWindowDimensions();
 
     const sortedTasks = dailyViewFilteredTasts.sort((a, b) => {
         if (a.startTime > b.startTime) return 1;
@@ -130,6 +140,30 @@ const DailyView: React.FC<props> = ({ date, tasks, setTaskFormData }) => {
         }
         return <h1 className="empty-tasks">No Tasks</h1>;
     };
+
+    if (windowDimensions.width <= 430) {
+        return (
+            <div className="daily-detail-container">
+                <div className="chosen-date-container">
+                    <button
+                        className="return-btn"
+                        onClick={() => setToggleMobile(false)}
+                    >
+                        <span className="visually-hidden">
+                            return to previous page
+                        </span>
+                        <GrReturn
+                            className="return-btn-svg"
+                            aria-hidden={true}
+                            focusable={false}
+                        />
+                    </button>
+                    <h2 className="chosen-date">{date.slice(0, 16)}</h2>
+                </div>
+                <div className="filtered-tasks">{filteredTasks()}</div>
+            </div>
+        );
+    }
 
     return (
         <div className="daily-detail-container">

@@ -72,11 +72,33 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+/* Mobile */
+@media screen and (max-width: 430px) and (orientation: portrait) {
+    #root {
+        overflow: unset;
+    }
+    .App {
+        min-height: unset;
+        min-width: unset;
+        max-height: unset;
+        max-width: unset;
+        width: 100%;
+        height: 100%;
+        border-radius: unset;
+        box-shadow: unset;
+    }
+    .title-bar {
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+    }
+    #weekly-calender-container {
+        display: unset;
+    }
+}
+/* PC */
 @media screen and (max-width: 1920px) and (orientation: landscape) {
     .App {
         max-width: 1050px;
     }
 }
-/* @media screen and (max-width: 1050px) and (orientation: landscape) {
-    
-} */
