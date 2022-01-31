@@ -137,7 +137,7 @@ const DailySummary: React.FC<props> = ({
     //     focusScroll(titleRef);
     // }, []);
 
-    if (windowDimensions.width <= 430) {
+    if (windowDimensions.width <= 930) {
         return (
             <div
                 className={
