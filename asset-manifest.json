@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Planner-Application/static/css/main.cc1d19da.chunk.css",
-    "main.js": "/Planner-Application/static/js/main.7ee3ff84.chunk.js",
-    "main.js.map": "/Planner-Application/static/js/main.7ee3ff84.chunk.js.map",
+    "main.css": "/Planner-Application/static/css/main.f16fcf3c.chunk.css",
+    "main.js": "/Planner-Application/static/js/main.6c85d170.chunk.js",
+    "main.js.map": "/Planner-Application/static/js/main.6c85d170.chunk.js.map",
     "runtime-main.js": "/Planner-Application/static/js/runtime-main.2456e132.js",
     "runtime-main.js.map": "/Planner-Application/static/js/runtime-main.2456e132.js.map",
     "static/js/2.817beb72.chunk.js": "/Planner-Application/static/js/2.817beb72.chunk.js",
     "static/js/2.817beb72.chunk.js.map": "/Planner-Application/static/js/2.817beb72.chunk.js.map",
     "index.html": "/Planner-Application/index.html",
-    "static/css/main.cc1d19da.chunk.css.map": "/Planner-Application/static/css/main.cc1d19da.chunk.css.map",
+    "static/css/main.f16fcf3c.chunk.css.map": "/Planner-Application/static/css/main.f16fcf3c.chunk.css.map",
     "static/js/2.817beb72.chunk.js.LICENSE.txt": "/Planner-Application/static/js/2.817beb72.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2456e132.js",
     "static/js/2.817beb72.chunk.js",
-    "static/css/main.cc1d19da.chunk.css",
-    "static/js/main.7ee3ff84.chunk.js"
+    "static/css/main.f16fcf3c.chunk.css",
+    "static/js/main.6c85d170.chunk.js"
   ]
 }
