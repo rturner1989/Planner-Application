@@ -143,7 +143,7 @@ const DailyView: React.FC<props> = ({
 
     if (windowDimensions.width <= 430) {
         return (
-            <div className="daily-detail-container">
+            <section className="daily-detail-container">
                 <div className="chosen-date-container">
                     <button
                         className="return-btn"
@@ -160,16 +160,16 @@ const DailyView: React.FC<props> = ({
                     </button>
                     <h2 className="chosen-date">{date.slice(0, 16)}</h2>
                 </div>
-                <div className="filtered-tasks">{filteredTasks()}</div>
-            </div>
+                <section className="filtered-tasks">{filteredTasks()}</section>
+            </section>
         );
     }
 
     return (
-        <div className="daily-detail-container">
+        <section className="daily-detail-container">
             <h2 className="chosen-date">{date.slice(0, 16)}</h2>
             <div className="filtered-tasks">{filteredTasks()}</div>
-        </div>
+        </section>
     );
 };
 

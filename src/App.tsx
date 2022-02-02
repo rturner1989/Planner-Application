@@ -1,3 +1,4 @@
+import React from "react";
 import WeeklyCalender from "./Components/WeeklyCalender/WeeklyCalender";
 
 function App() {

@@ -305,7 +305,7 @@ const WeeklyView: React.FC<props> = ({
     }, [taskFormData]);
 
     return (
-        <div
+        <aside
             className={
                 toggleMobile
                     ? "weekly-overview-container mobile"
@@ -313,7 +313,7 @@ const WeeklyView: React.FC<props> = ({
             }
             tabIndex={-1}
         >
-            <div className="btn-group">
+            <header className="btn-group">
                 {weekCount < 1 ? (
                     <button id="prev-week" onClick={previousWeek} disabled>
                         <span className="visually-hidden">previous week</span>
@@ -353,8 +353,8 @@ const WeeklyView: React.FC<props> = ({
                         />
                     </button>
                 )}
-            </div>
-            <div className="days">
+            </header>
+            <section className="days">
                 {arrOfWeeks[weekCount].map((week) => {
                     return (
                         <DailySummary
@@ -372,8 +372,8 @@ const WeeklyView: React.FC<props> = ({
                         />
                     );
                 })}
-            </div>
-        </div>
+            </section>
+        </aside>
     );
 };
 
